@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agencia de Detectives del Lenguaje</title>
+<style>
+/* Instala la fuente Blox en tu computador para utilizarla */
+:root {
+  --navy: #172554;
+  --blue: #1d4ed8;
+  --gold: #fbbf24;
+  --paper: #fffdf5;
+  --ink: #172033;
+  --green: #15803d;
+  --red: #b91c1c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Blox', Arial, sans-serif;
+  background: radial-gradient(circle at top, #334155, #0f172a 70%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+header {
+  background: #111827;
+  color: white;
+  padding: 18px 20px;
+  border-bottom: 4px solid var(--gold);
+}
+
+.header-inner {
+  max-width: 1050px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  font-size: 2.3rem;
+  background: #fef3c7;
+  border-radius: 16px;
+  padding: 8px;
+}
+
+h1 { font-size: clamp(1.25rem, 3vw, 2rem); margin: 0; }
+header p { margin: 4px 0 0; color: #cbd5e1; }
+
+main {
+  max-width: 1050px;
+  margin: 24px auto;
+  padding: 0 14px 35px;
+}
+
+.panel {
+  background: var(--paper);
+  border-radius: 20px;
+  padding: clamp(18px, 4vw, 32px);
+  box-shadow: 0 18px 45px #0005;
+}
+
+.hidden { display: none !important; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .78rem;
+  font-weight: 800;
+  color: #475569;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: bold;
+  background: var(--blue);
+  color: white;
+  margin: 5px 3px;
+}
+
+button:hover { filter: brightness(1.12); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.secondary {
+  background: #e2e8f0;
+  color: #172033;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: white;
+  color: var(--ink);
+  border: 2px solid #cbd5e1;
+  margin: 10px 0;
+}
+
+.option:hover { border-color: var(--blue); }
+
+.option.correct {
+  border-color: var(--green);
+  background: #dcfce7;
+}
+
+.option.incorrect {
+  border-color: var(--red);
+  background: #fee2e2;
+}
+
+.progress {
+  background: #e2e8f0;
+  height: 12px;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  transition: width .3s;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.stat {
+  background: #dbeafe;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: bold;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.mission {
+  border: 2px solid #cbd5e1;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  min-height: 110px;
+}
+
+.mission.done {
+  background: #dcfce7;
+  border-color: var(--green);
+}
+
+.mission strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.story-box {
+  background: #fef3c7;
+  border: 2px dashed #d97706;
+  padding: 16px;
+  border-radius: 14px;
+  line-height: 1.7;
+}
+
+textarea, input {
+  width: 100%;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+  margin: 8px 0;
+}
+
+.feedback {
+  border-radius: 12px;
+  padding: 14px;
+  margin: 14px 0;
+  background: #e2e8f0;
+  line-height: 1.5;
+}
+
+.feedback.success { background: #dcfce7; }
+.feedback.error { background: #fee2e2; }
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  padding: 8px 12px;
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+  border-radius: 99px;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  color: #cbd5e1;
+  padding: 0 15px 25px;
+}
+
+@media (max-width: 600px) {
+  .header-inner { align-items: flex-start; }
+  .logo { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🔎</div>
+    <div>
+      <h1>AGENCIA DE DETECTIVES DEL LENGUAJE</h1>
+      <p>El misterio del espacio narrativo · Grado sexto</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="panel" id="inicio">
+    <div class="eyebrow">Expediente secreto · Caso 06</div>
+    <h2>¡Detectives, necesitamos su ayuda!</h2>
+    <p>
+      Varios lugares de diferentes historias han desaparecido.
+      Tu misión es investigar las pistas, reconocer los espacios
+      narrativos y reconstruir los escenarios de cada relato.
+    </p>
+
+    <div class="story-box">
+      <strong>Tu misión:</strong>
+      superar ocho retos, reunir puntos, descubrir pistas y conseguir
+      insignias para convertirte en un detective experto del lenguaje.
+    </div>
+
+    <label for="nombre">Escribe tu nombre de detective:</label>
+    <input id="nombre" placeholder="Nombre o nombre del equipo">
+
+    <button onclick="comenzar()">Iniciar investigación</button>
+  </section>
+
+  <section class="panel hidden" id="juego">
+    <div class="eyebrow" id="etiqueta">Misión 1</div>
+    <h2 id="titulo"></h2>
+    <p id="instruccion"></p>
+
+    <div class="stats">
+      <div class="stat">Detective: <span id="jugador"></span></div>
+      <div class="stat">Puntos: <span id="puntos">0</span></div>
+      <div class="stat">Insignias: <span id="cantidad">0</span></div>
+    </div>
+
+    <div class="progress"><div id="barra"></div></div>
+
+    <div id="contenido"></div>
+    <div id="retroalimentacion" class="feedback hidden"></div>
+
+    <button class="secondary" onclick="pista()">Consultar una pista</button>
+    <button id="continuar" class="hidden" onclick="siguiente()">
+      Continuar misión
+    </button>
+    <button class="secondary" onclick="mostrarMapa()">Ver mapa de misiones</button>
+  </section>
+
+  <section class="panel hidden" id="mapa">
+    <div class="eyebrow">Tablero de investigación</div>
+    <h2>Mapa de misiones</h2>
+    <p>Selecciona una misión disponible para continuar tu investigación.</p>
+    <div id="misiones" class="mission-grid"></div>
+    <button onclick="volverJuego()">Volver a la misión</button>
+  </section>
+
+  <section class="panel hidden" id="final">
+    <div class="eyebrow">Expediente completado</div>
+    <h2>¡Investigación finalizada!</h2>
+    <p id="resumen"></p>
+    <div class="story-box">
+      <h3>Reto final: crea tu propio escenario</h3>
+      <p>
+        Imagina un lugar misterioso. Describe dónde ocurre una historia,
+        qué detalles se observan y qué sensaciones produce el ambiente.
+      </p>
+      <textarea id="creacion" rows="5"
+        placeholder="Mi historia comienza en..."></textarea>
+      <button onclick="guardarCreacion()">Guardar mi creación</button>
+      <div id="mensajeFinal"></div>
+    </div>
+    <div class="badges" id="insigniasFinales"></div>
+    <button onclick="reiniciar()">Jugar de nuevo</button>
+  </section>
+</main>
+
+<footer>
+  Español · Sexto grado · Aprende investigando, leyendo e imaginando.
+</footer>
+
+<script>
+const retos = [
+  {
+    titulo: "La estación abandonada",
+    instruccion: "Lee la pista y descubre dónde ocurre la escena.",
+    texto: "El tren dejó de funcionar hace años. Las bancas están cubiertas de polvo y un reloj detenido cuelga sobre la taquilla.",
+    pregunta: "¿Cuál es el espacio físico de esta escena?",
+    opciones: [
+      "Una estación de tren abandonada",
+      "Una playa durante el verano",
+      "Una cocina familiar",
+      "Un salón de clases"
+    ],
+    correcta: 0,
+    pista: "Busca el lugar donde normalmente llegan y salen los trenes.",
+    explicacion: "Las bancas, la taquilla y el reloj ayudan a identificar una estación de tren."
+  },
+  {
+    titulo: "La casa de los susurros",
+    instruccion: "Identifica cómo se siente el espacio descrito.",
+    texto: "Las cortinas se movían aunque las ventanas estaban cerradas. Un ruido recorría el pasillo oscuro y nadie se atrevía a entrar.",
+    pregunta: "¿Qué ambiente predomina en el lugar?",
+    opciones: [
+      "Alegre y festivo",
+      "Misterioso e inquietante",
+      "Tranquilo y divertido",
+      "Deportivo y competitivo"
+    ],
+    correcta: 1,
+    pista: "Piensa en las emociones que producen el pasillo oscuro y los ruidos extraños.",
+    explicacion: "La oscuridad y los sonidos inexplicables crean un ambiente de misterio."
+  },
+  {
+    titulo: "El mercado de los colores",
+    instruccion: "Reconoce el espacio a partir de los detalles.",
+    texto: "Los vendedores ofrecían frutas, las personas negociaban los precios y el aroma del pan recién horneado recorría los puestos.",
+    pregunta: "¿En qué lugar sucede la escena?",
+    opciones: [
+      "En un hospital",
+      "En un bosque solitario",
+      "En un mercado",
+      "En un laboratorio"
+    ],
+    correcta: 2,
+    pista: "Los vendedores, los precios y los puestos son claves.",
+    explicacion: "La presencia de vendedores y puestos de productos caracteriza un mercado."
+  },
+  {
+    titulo: "El mensaje bajo la lluvia",
+    instruccion: "Distingue el espacio físico de las condiciones ambientales.",
+    texto: "Camila esperaba bajo el techo de una parada mientras la lluvia golpeaba el pavimento de la avenida.",
+    pregunta: "¿Cuál es el espacio físico principal?",
+    opciones: [
+      "Una parada junto a una avenida",
+      "Una montaña nevada",
+      "Un salón de baile",
+      "Una biblioteca subterránea"
+    ],
+    correcta: 0,
+    pista: "Identifica el lugar en el que Camila está esperando.",
+    explicacion: "La parada y la avenida constituyen el espacio físico de la escena; la lluvia es una condición ambiental."
+  },
+  {
+    titulo: "El jardín escondido",
+    instruccion: "Analiza los detalles que construyen el escenario.",
+    texto: "Detrás de una puerta cubierta de enredaderas, Tomás encontró flores violetas, una fuente y caminos de piedra.",
+    pregunta: "¿Qué detalle permite imaginar mejor el espacio?",
+    opciones: [
+      "Tomás tenía hambre",
+      "La puerta era antigua",
+      "Había flores, una fuente y caminos de piedra",
+      "Alguien contó una historia"
+    ],
+    correcta: 2,
+    pista: "Busca las palabras que describen lo que se puede ver en el lugar.",
+    explicacion: "Los elementos visibles permiten al lector construir una imagen mental del jardín."
+  },
+  {
+    titulo: "La ciudad sin sonidos",
+    instruccion: "Relaciona el escenario con la sensación que produce.",
+    texto: "En las calles no circulaban vehículos, las tiendas estaban cerradas y ni siquiera se escuchaban pájaros.",
+    pregunta: "¿Qué sensación produce este espacio?",
+    opciones: [
+      "Mucho movimiento y celebración",
+      "Silencio y soledad",
+      "Emoción por un partido",
+      "Ruido de una fábrica"
+    ],
+    correcta: 1,
+    pista: "Imagina una ciudad sin personas, vehículos ni sonidos.",
+    explicacion: "La ausencia de movimiento y sonidos crea una sensación de silencio y soledad."
+  },
+  {
+    titulo: "El refugio de la montaña",
+    instruccion: "Reconoce los elementos del escenario natural.",
+    texto: "El viento golpeaba las paredes de madera. Afuera, la neblina cubría los pinos y el sendero desaparecía entre las rocas.",
+    pregunta: "¿Qué elemento corresponde al espacio natural?",
+    opciones: [
+      "Las paredes de madera",
+      "La puerta del refugio",
+      "La neblina y los pinos",
+      "La lámpara de la habitación"
+    ],
+    correcta: 2,
+    pista: "Diferencia los elementos de la construcción de los elementos de la naturaleza.",
+    explicacion: "La neblina y los pinos pertenecen al entorno natural que rodea el refugio."
+  },
+  {
+    titulo: "El escenario perdido",
+    instruccion: "Aplica lo aprendido para reconstruir una historia.",
+    texto: "Una niña encontró una llave brillante junto a un puente antiguo. Al otro lado se veía una torre rodeada de árboles.",
+    pregunta: "¿Qué descripción ayudaría a construir mejor el espacio narrativo?",
+    opciones: [
+      "La niña estaba emocionada",
+      "El puente tenía piedras húmedas y musgo entre sus grietas",
+      "La niña quería descubrir un secreto",
+      "Su hermano era muy curioso"
+    ],
+    correcta: 1,
+    pista: "Elige una descripción que añada detalles concretos del lugar.",
+    explicacion: "Las piedras y el musgo permiten imaginar con mayor precisión el puente."
+  }
+];
+
+let jugador = "Detective";
+let puntos = 0;
+let indice = 0;
+let respondidas = [];
+let insignias = [];
+let bloqueado = false;
+let ultimo = 0;
+
+function ocultarTodo() {
+  ["inicio", "juego", "mapa", "final"].forEach(id => {
+    document.getElementById(id).classList.add("hidden");
+  });
+}
+
+function comenzar() {
+  jugador = document.getElementById("nombre").value.trim() || "Detective";
+  puntos = 0;
+  indice = 0;
+  respondidas = [];
+  insignias = [];
+  bloqueado = false;
+  ocultarTodo();
+  document.getElementById("juego").classList.remove("hidden");
+  dibujarReto();
+}
+
+function dibujarReto() {
+  const reto = retos[indice];
+  bloqueado = false;
+  ultimo = indice;
+
+  document.getElementById("etiqueta").textContent =
+    `Misión ${indice + 1} de ${retos.length}`;
+  document.getElementById("titulo").textContent = reto.titulo;
+  document.getElementById("instruccion").textContent = reto.instruccion;
+  document.getElementById("jugador").textContent = jugador;
+  document.getElementById("puntos").textContent = puntos;
+  document.getElementById("cantidad").textContent = insignias.length;
+  document.getElementById("barra").style.width =
+    `${(indice / retos.length) * 100}%`;
+
+  document.getElementById("retroalimentacion").classList.add("hidden");
+  document.getElementById("continuar").classList.add("hidden");
+
+  const contenido = document.getElementById("contenido");
+  contenido.innerHTML = "";
+
+  const texto = document.createElement("div");
+  texto.className = "story-box";
+  texto.textContent = reto.texto;
+  contenido.appendChild(texto);
+
+  const pregunta = document.createElement("h3");
+  pregunta.textContent = reto.pregunta;
+  contenido.appendChild(pregunta);
+
+  reto.opciones.forEach((opcion, i) => {
+    const boton = document.createElement("button");
+    boton.className = "option";
+    boton.textContent = `${String.fromCharCode(65 + i)}. ${opcion}`;
+    boton.onclick = () => responder(i, boton);
+    contenido.appendChild(boton);
+  });
+
+  const mapaBtn = document.querySelector(
+    '#juego button[onclick="mostrarMapa()"]'
+  );
+  mapaBtn.classList.remove("hidden");
+}
+
+function responder(eleccion, boton) {
+  if (bloqueado) return;
+  bloqueado = true;
+
+  const reto = retos[indice];
+  const correcta = eleccion === reto.correcta;
+  const caja = document.getElementById("retroalimentacion");
+
+  if (correcta) {
+    puntos += 10;
+    insignias.push(`Insignia ${indice + 1}`);
+    caja.className = "feedback success";
+    caja.textContent = `¡Excelente investigación! ${reto.explicacion} Ganaste 10 puntos.`;
+    boton.classList.add("correct");
+  } else {
+    caja.className = "feedback error";
+    caja.textContent =
+      `Esa no es la pista adecuada. ${reto.explicacion} Puedes volver a intentarlo en otra partida.`;
+    boton.classList.add("incorrect");
+    document.querySelectorAll(".option")[reto.correcta]
+      .classList.add("correct");
+  }
+
+  respondidas[indice] = correcta;
+  document.getElementById("puntos").textContent = puntos;
+  document.getElementById("cantidad").textContent = insignias.length;
+  document.getElementById("barra").style.width =
+    `${((indice + 1) / retos.length) * 100}%`;
+
+  caja.classList.remove("hidden");
+  document.getElementById("continuar").classList.remove("hidden");
+
+  document.getElementById("continuar").textContent =
+    indice === retos.length - 1 ? "Ver resultados" : "Siguiente misión";
+}
+
+function pista() {
+  const caja = document.getElementById("retroalimentacion");
+  caja.className = "feedback";
+  caja.textContent = `Pista del detective: ${retos[indice].pista}`;
+  caja.classList.remove("hidden");
+}
+
+function siguiente() {
+  if (indice < retos.length - 1) {
+    indice++;
+    dibujarReto();
+  } else {
+    terminar();
+  }
+}
+
+function mostrarMapa() {
+  ocultarTodo();
+  document.getElementById("mapa").classList.remove("hidden");
+
+  const contenedor = document.getElementById("misiones");
+  contenedor.innerHTML = "";
+
+  retos.forEach((reto, i) => {
+    const boton = document.createElement("button");
+    boton.className = "mission";
+    if (respondidas[i] === true) boton.classList.add("done");
+
+    boton.innerHTML =
+      `<strong>Misión ${i + 1}</strong>${reto.titulo}<br>` +
+      `${respondidas[i] === true ? "✓ Completada" :
+        i <= indice ? "Disponible" : "Por descubrir"}`;
+
+    boton.onclick = () => {
+      indice = i;
+      ocultarTodo();
+      document.getElementById("juego").classList.remove("hidden");
+      dibujarReto();
+    };
+
+    contenedor.appendChild(boton);
+  });
+}
+
+function volverJuego() {
+  ocultarTodo();
+  document.getElementById("juego").classList.remove("hidden");
+}
+
+function terminar() {
+  ocultarTodo();
+  document.getElementById("final").classList.remove("hidden");
+
+  const aciertos = respondidas.filter(Boolean).length;
+  document.getElementById("resumen").textContent =
+    `${jugador}, terminaste la investigación con ${puntos} puntos y ` +
+    `${aciertos} misiones acertadas de ${retos.length}.`;
+
+  document.getElementById("insigniasFinales").innerHTML =
+    insignias.map((insignia, i) =>
+      `<span class="badge">🏅 ${insignia}</span>`
+    ).join("");
+}
+
+function guardarCreacion() {
+  const texto = document.getElementById("creacion").value.trim();
+  const mensaje = document.getElementById("mensajeFinal");
+
+  if (texto.length < 20) {
+    mensaje.textContent =
+      "Agrega más detalles para que el escenario pueda imaginarse con claridad.";
+    return;
+  }
+
+  mensaje.textContent =
+    "¡Creación registrada en tu expediente! Recuerda copiarla si deseas conservarla.";
+}
+
+function reiniciar() {
+  ocultarTodo();
+  document.getElementById("inicio").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
