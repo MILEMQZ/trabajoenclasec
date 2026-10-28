@@ -1,631 +1,1505 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agencia de Detectives del Lenguaje</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Silkscreen&display=swap" rel="stylesheet">
+<title>Detectives del Lenguaje 8-bit · La poción dulce</title>
+<!-- Letra 8 bit incrustada en este archivo (Silkscreen + Pixelify Sans, licencia OFL): no necesita internet. -->
 <style>
-/* Instala la fuente Blox en tu computador para utilizarla */
+/* Los números salen con Silkscreen: en Pixelify Sans el 5 se confunde con la S */
 :root {
-  --navy: #172554;
-  --blue: #1d4ed8;
-  --gold: #fbbf24;
-  --paper: #fffdf5;
-  --ink: #172033;
-  --green: #15803d;
-  --red: #b91c1c;
+  --noche: #090a1c;
+  --panel: #1d1b4a;
+  --panel2: #2f2d78;
+  --blanco: #f4f4ff;
+  --cian: #3ef0ff;
+  --amarillo: #ffd23f;
+  --rojo: #ff4d6d;
+  --verde: #5bd75b;
+  --fuente: 'Pixelify Sans', 'Courier New', monospace;
+  --titulo: 'Silkscreen', 'Courier New', monospace;
 }
-
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
-  font-family: 'Blox', Arial, sans-serif;
-  background: radial-gradient(circle at top, #334155, #0f172a 70%);
-  color: var(--ink);
   min-height: 100vh;
+  font-family: var(--fuente);
+  font-size: clamp(.62rem, 1.7vw, .78rem);
+  line-height: 1.9;
+  color: var(--blanco);
+  background-color: var(--noche);
+  background-image:
+    linear-gradient(#ffffff0a 4px, transparent 4px),
+    linear-gradient(90deg, #ffffff0a 4px, transparent 4px);
+  background-size: 40px 40px;
 }
-
-header {
-  background: #111827;
-  color: white;
-  padding: 18px 20px;
-  border-bottom: 4px solid var(--gold);
-}
-
-.header-inner {
-  max-width: 1050px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.logo {
-  font-size: 2.3rem;
-  background: #fef3c7;
-  border-radius: 16px;
-  padding: 8px;
-}
-
-h1 { font-size: clamp(1.25rem, 3vw, 2rem); margin: 0; }
-header p { margin: 4px 0 0; color: #cbd5e1; }
-
-main {
-  max-width: 1050px;
-  margin: 24px auto;
-  padding: 0 14px 35px;
-}
-
+header { background: #000; border-bottom: 6px solid var(--amarillo); padding: 16px 14px; }
+.cabecera { max-width: 1000px; margin: auto; display: flex; gap: 14px; align-items: center; }
+.cabecera .lupa { font-size: 2rem; }
+h1 { margin: 0; font-size: clamp(.8rem, 3.2vw, 1.4rem); line-height: 1.5; color: var(--amarillo); }
+header p { margin: 6px 0 0; color: var(--cian); font-size: .7em; }
+main { max-width: 1000px; margin: 0 auto; padding: 0 14px 30px; }
 .panel {
-  background: var(--paper);
-  border-radius: 20px;
-  padding: clamp(18px, 4vw, 32px);
-  box-shadow: 0 18px 45px #0005;
+  background: var(--panel);
+  border: 4px solid var(--blanco);
+  box-shadow: 0 0 0 4px #000, 8px 10px 0 4px #000;
+  padding: clamp(14px, 3vw, 26px);
+  margin-bottom: 26px;
 }
-
-.hidden { display: none !important; }
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  font-size: .78rem;
-  font-weight: 800;
-  color: #475569;
-}
+h2 { margin: 0 0 12px; font-size: clamp(.8rem, 2.4vw, 1.15rem); line-height: 1.6; color: var(--amarillo); }
+h3 { margin: 18px 0 10px; font-size: 1em; line-height: 1.7; color: var(--cian); }
+p { margin: 8px 0; }
+.oculto { display: none !important; }
 
 button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 12px;
-  padding: 12px 18px;
   font: inherit;
-  font-weight: bold;
-  background: var(--blue);
-  color: white;
-  margin: 5px 3px;
+  line-height: 1.7;
+  cursor: pointer;
+  color: #1a1033;
+  background: var(--amarillo);
+  border: 4px solid #000;
+  box-shadow: inset -4px -4px 0 #0004, inset 4px 4px 0 #fff5, 0 5px 0 #000;
+  padding: 10px 14px;
+  margin: 8px 6px 8px 0;
 }
-
-button:hover { filter: brightness(1.12); }
+button:hover:not(:disabled) { background: #ffe27a; }
+button:active:not(:disabled) { transform: translateY(4px); box-shadow: inset -4px -4px 0 #0004, inset 4px 4px 0 #fff5, 0 1px 0 #000; }
 button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 4px dashed var(--cian); outline-offset: 3px; }
+.suave { background: var(--panel2); color: var(--blanco); }
+.suave:hover:not(:disabled) { background: #4340a8; }
 
-.secondary {
-  background: #e2e8f0;
-  color: #172033;
-}
-
-.option {
-  display: block;
+input, textarea {
   width: 100%;
-  text-align: left;
-  background: white;
-  color: var(--ink);
-  border: 2px solid #cbd5e1;
+  font: inherit;
+  color: var(--blanco);
+  background: #000;
+  border: 4px solid var(--blanco);
+  padding: 12px;
   margin: 10px 0;
 }
+label { display: block; margin-top: 14px; }
 
-.option:hover { border-color: var(--blue); }
-
-.option.correct {
-  border-color: var(--green);
-  background: #dcfce7;
+.nota {
+  background: #000;
+  border: 4px solid var(--blanco);
+  box-shadow: 0 0 0 3px var(--panel);
+  padding: 14px 16px;
+  line-height: 2;
 }
+.reglas { padding-left: 18px; line-height: 2.1; }
 
-.option.incorrect {
-  border-color: var(--red);
-  background: #fee2e2;
-}
+.recursos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.dato { background: #000; border: 3px solid var(--cian); padding: 4px 10px; }
 
-.progress {
-  background: #e2e8f0;
-  height: 12px;
-  border-radius: 99px;
-  overflow: hidden;
-  margin: 12px 0;
-}
+/* Barra de 8 preguntas */
+.pips { display: flex; gap: 6px; margin: 12px 0 16px; }
+.pip { flex: 1; height: 16px; background: #000; border: 3px solid #5b58c4; }
+.pip.ok { background: var(--verde); border-color: #000; }
+.pip.fallo { background: var(--rojo); border-color: #000; }
+.pip.actual { border-color: var(--amarillo); }
 
-.progress div {
-  height: 100%;
-  width: 0;
-  background: var(--gold);
-  transition: width .3s;
-}
+.nivel { color: var(--verde); margin: 0 0 4px; }
+.escena-titulo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.escena-titulo .grande { font-size: 2rem; }
+.escena-titulo h2 { margin: 0; }
 
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 15px 0;
-}
+.rutas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
+.ruta { text-align: left; padding: 14px; margin: 0; }
+.ruta strong { display: block; margin-bottom: 8px; }
+.ruta.seguro { background: var(--verde); }
+.ruta.riesgo { background: var(--rojo); }
 
-.stat {
-  background: #dbeafe;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: bold;
-}
+.option { display: block; width: 100%; text-align: left; margin: 10px 0; background: var(--panel2); color: var(--blanco); }
+.option:hover:not(:disabled) { background: #4340a8; border-color: var(--amarillo); }
+.option.correct { background: #1f8a3a; color: #fff; opacity: 1; }
+.option.incorrect { background: #b3203f; color: #fff; opacity: 1; }
+.option.tachada { text-decoration: line-through; opacity: .35; }
 
-.mission-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-  margin: 18px 0;
-}
+.feedback { margin: 16px 0; padding: 14px; background: #000; border: 4px solid var(--cian); line-height: 2; }
+.feedback.success { border-color: var(--verde); }
+.feedback.error { border-color: var(--rojo); }
 
-.mission {
-  border: 2px solid #cbd5e1;
-  background: white;
-  color: var(--ink);
-  text-align: left;
-  min-height: 110px;
-}
-
-.mission.done {
-  background: #dcfce7;
-  border-color: var(--green);
-}
-
-.mission strong {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.story-box {
-  background: #fef3c7;
-  border: 2px dashed #d97706;
-  padding: 16px;
-  border-radius: 14px;
-  line-height: 1.7;
-}
-
-textarea, input {
-  width: 100%;
-  border: 2px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 12px;
-  font: inherit;
-  margin: 8px 0;
-}
-
-.feedback {
-  border-radius: 12px;
-  padding: 14px;
-  margin: 14px 0;
-  background: #e2e8f0;
-  line-height: 1.5;
-}
-
-.feedback.success { background: #dcfce7; }
-.feedback.error { background: #fee2e2; }
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.badge {
-  padding: 8px 12px;
-  background: #fef3c7;
-  border: 2px solid #f59e0b;
-  border-radius: 99px;
-  font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  color: #cbd5e1;
-  padding: 0 15px 25px;
-}
+.insignias { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.insignia { padding: 6px 10px; background: #000; border: 3px solid var(--amarillo); }
+.rango { font-size: 1.1em; color: var(--verde); margin: 10px 0; }
+footer { text-align: center; color: #9a98e0; padding: 0 15px 24px; font-size: .65rem; }
 
 @media (max-width: 600px) {
-  .header-inner { align-items: flex-start; }
-  .logo { font-size: 1.5rem; }
+  .cabecera .lupa { font-size: 1.5rem; }
 }
+@media (prefers-reduced-motion: reduce) {
+}
+
+/* ===== Letra 8 bit ===== */
+body {
+  font-family: var(--fuente);
+  font-size: clamp(16px, 2.3vw, 19px);
+  line-height: 1.55;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  text-rendering: optimizeSpeed;
+}
+h1 { font-family: var(--titulo); font-size: 20px; line-height: 1.3; letter-spacing: 1px; }
+h2 { font-family: var(--titulo); font-size: 18px; line-height: 1.4; letter-spacing: 1px; }
+h3 { font-family: var(--titulo); font-size: 16px; line-height: 1.5; letter-spacing: 1px; }
+@media (min-width: 700px) { h1 { font-size: 32px; } h2 { font-size: 24px; } }
+header p { font-size: 1.05em; }
+button { font-family: var(--titulo); font-size: 16px; line-height: 1.4; letter-spacing: 1px; }
+.option, .ruta { font-family: var(--fuente); font-size: 1.1em; letter-spacing: 0; line-height: 1.4; }
+.ruta strong { font-family: var(--titulo); font-size: 16px; letter-spacing: 1px; }
+.dato { font-family: var(--titulo); font-size: 16px; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; }
+.nivel { font-family: var(--titulo); font-size: 16px; letter-spacing: 1px; }
+.rango { font-family: var(--titulo); font-size: 20px; }
+.nota > strong { font-family: var(--titulo); letter-spacing: 1px; }
+.nota, .feedback { line-height: 1.7; }
+.reglas { line-height: 1.8; }
+footer { font-size: 14px; }
+
+/* ===== Iconos pixel art ===== */
+.ic { display: inline-block; vertical-align: middle; line-height: 0; }
+.ico { display: inline-block; vertical-align: middle; image-rendering: pixelated; flex: none; }
+.dato .ico + .ico { margin-left: 3px; }
+button .ico { position: relative; top: -2px; }
+.lupa { line-height: 0; }
+.lupa svg { display: block; width: 42px; height: 48px; image-rendering: pixelated; }
+.escena-titulo .grande { display: inline-flex; line-height: 0; }
+.insignia { display: flex; align-items: center; gap: 8px; }
+
+/* ===== Mundo nocturno ===== */
+.mini svg { display: block; width: 28px; height: 32px; image-rendering: pixelated; }
+.mundo {
+  position: relative; max-width: 1000px; margin: 22px auto 26px;
+  background: #000; border: 4px solid var(--blanco);
+  box-shadow: 0 0 0 4px #000, 8px 10px 0 4px #000;
+}
+.mundo canvas { display: block; width: 100%; height: auto; image-rendering: crisp-edges; image-rendering: pixelated; }
+.hud { position: absolute; left: 8px; top: 8px; display: flex; flex-wrap: wrap; gap: 6px; max-width: 72%; margin: 0; }
+.hud-der { position: absolute; right: 8px; top: 8px; }
+.hud .dato, .hud-der .dato { background: rgba(8, 12, 40, .84); border: 3px solid #6f8cff; font-size: 14px; padding: 2px 8px; }
+.mundo.inicio .hud, .mundo.inicio .hud-der { display: none; }
+@media (max-width: 700px) {
+  .hud, .hud-der { position: static; max-width: none; padding: 8px 8px 0; background: #000; }
+  .hud-der { padding-bottom: 8px; }
+}
+
+/* ===== Ingredientes y poción ===== */
+.cabecera #bSonido { margin-left: auto; font-size: 14px; padding: 6px 10px; }
+.hud-ing { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 4px; }
+.ing-slot { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(8,12,40,.84); border: 3px solid #6f8cff; color: #6f8cff; font-family: var(--titulo); font-size: 14px; }
+.ing-slot.lleno { border-color: var(--amarillo); }
+.mundo.inicio .hud-ing { display: none; }
+@media (max-width: 700px) { .hud-ing { position: static; padding: 0 8px 8px; background: #000; } }
+.dulces { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; margin: 8px 0; }
+.dulce { margin: 0; text-align: left; background: var(--panel2); color: var(--blanco); font-family: var(--fuente); font-size: 1.05em; letter-spacing: 0; }
+.dulce.sel { background: var(--amarillo); color: #1a1033; }
+.caldero { text-align: center; margin: 14px 0 4px; min-height: 90px; }
+.burbujas { height: 26px; }
+.burbujas i { display: inline-block; width: 10px; height: 10px; margin: 0 7px; background: var(--verde); animation: sube 1.2s steps(6) infinite; }
+.burbujas i:nth-child(2) { animation-delay: .4s; } .burbujas i:nth-child(3) { animation-delay: .8s; }
+@keyframes sube { from { transform: translateY(18px); opacity: 1; } to { transform: translateY(-8px); opacity: 0; } }
+#cargaPocion { text-align: center; color: var(--cian); min-height: 2em; }
+@media (prefers-reduced-motion: reduce) { .burbujas i { animation: none; } }
+@media print { body * { visibility: hidden; } #tarjeta, #tarjeta * { visibility: visible; } #tarjeta { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; } }
+
+/* ===== Celular, tablet y PC ===== */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+header { padding-top: max(16px, env(safe-area-inset-top, 0px)); }
+button, .option { touch-action: manipulation; -webkit-tap-highlight-color: transparent; min-height: 48px; }
+textarea { resize: vertical; }
+svg, canvas { max-width: 100%; }
+@media (max-width: 700px) {
+  main { padding: 0 10px 24px; }
+  header { padding-left: 10px; padding-right: 10px; }
+  .cabecera { gap: 10px; }
+  .lupa svg { width: 30px; height: 34px; }
+  .cabecera #bSonido { padding: 4px 8px; min-height: 40px; font-size: 12px; }
+  .mundo { margin: 12px auto 16px; }
+  .panel { padding: 14px 12px; margin-bottom: 20px; box-shadow: 0 0 0 3px #000, 5px 6px 0 3px #000; }
+  .rutas { grid-template-columns: 1fr; }
+  .dulces { grid-template-columns: 1fr 1fr; }
+  .hud .dato, .hud-der .dato { font-size: 12px; }
+  .option { padding: 12px; }
+  #acciones button, #acRes button { width: 100%; margin-right: 0; }
+}
+@media (max-width: 380px) { .dulces { grid-template-columns: 1fr; } h2 { font-size: 15px; } }
+@media (orientation: landscape) and (max-height: 600px) { .mundo { max-width: min(1000px, 150vh); } }
+@media (min-width: 701px) and (max-width: 1100px) { main { padding: 0 20px 30px; } .mundo { margin-left: 20px; margin-right: 20px; max-width: none; } }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-inner">
-    <div class="logo">🔎</div>
+  <div class="cabecera">
+    <div class="lupa" id="lupa"></div>
     <div>
-      <h1>AGENCIA DE DETECTIVES DEL LENGUAJE</h1>
-      <p>El misterio del espacio narrativo · Grado sexto</p>
+      <h1>Detectives del Lenguaje</h1>
+      <p>La bruja y la poción dulce · Grado sexto</p>
     </div>
+    <button class="suave" id="bSonido" onclick="alternarSonido()">Sonido: sí</button>
   </div>
 </header>
 
 <main>
+  <div class="mundo inicio" id="mundo">
+    <canvas id="mundoCanvas" width="640" height="352" role="img" aria-label="Mundo de noche: un sendero con seis obstáculos que la bruja detective debe cruzar volando hasta la torre final"></canvas>
+    <div class="hud" id="recursos"></div>
+    <div class="hud-der" id="hudDer"></div>
+    <div class="hud-ing" id="hudIng" aria-label="Ingredientes reunidos"></div>
+  </div>
+
   <section class="panel" id="inicio">
-    <div class="eyebrow">Expediente secreto · Caso 06</div>
-    <h2>¡Detectives, necesitamos su ayuda!</h2>
+    <h2>¡Nueva partida!</h2>
     <p>
-      Varios lugares de diferentes historias han desaparecido.
-      Tu misión es investigar las pistas, reconocer los espacios
-      narrativos y reconstruir los escenarios de cada relato.
+      Una noche oscura cubrió el mundo y los escenarios de las historias se perdieron en la niebla. Guía a la
+      bruja detective por el sendero y hazla volar sobre 6 obstáculos hasta el caldero mágico, donde preparará una poción para compartir dulces con los niños de sexto. Cada obstáculo tiene 8 preguntas.
     </p>
-
-    <div class="story-box">
-      <strong>Tu misión:</strong>
-      superar ocho retos, reunir puntos, descubrir pistas y conseguir
-      insignias para convertirte en un detective experto del lenguaje.
+    <div class="nota">
+      <strong>Reglas del juego</strong>
+      <ul class="reglas">
+        <li>En cada obstáculo debes responder 8 preguntas y acertar al menos 5 para cruzar.</li>
+        <li>Si no lo logras, pierdes una vida <i class="ic" data-n="corazon"></i> y repites el obstáculo. Empiezas con 5 vidas.</li>
+        <li>Antes de cada obstáculo eliges tu ruta: camino seguro <i class="ic" data-n="hoja"></i> (+10 puntos por acierto, los errores no cuestan vidas) o atajo arriesgado <i class="ic" data-n="fuego"></i> (+25 puntos por acierto, pero cada error cuesta una vida).</li>
+        <li>La bruja camina por el sendero y vuela sobre cada obstáculo en su escoba. Si eliges el atajo arriesgado, ¡vuela todo el camino!</li>
+        <li>Tienes 5 linternas <i class="ic" data-n="linterna"></i> (pistas) y 3 tijeras <i class="ic" data-n="tijeras"></i> (quitan dos respuestas). Al cruzar un obstáculo ganas una linterna.</li>
+        <li>Tres aciertos seguidos dan +5 puntos de racha.</li>
+        <li>Al cruzar cada obstáculo la bruja <b>reclama un ingrediente mágico</b>. Con los 6 ingredientes preparará, en el caldero final, una poción para comer dulces con los niños de sexto.</li>
+        <li>Atajo de teclado: responde con las letras A, B, C o D.</li>
+      </ul>
     </div>
-
-    <label for="nombre">Escribe tu nombre de detective:</label>
-    <input id="nombre" placeholder="Nombre o nombre del equipo">
-
-    <button onclick="comenzar()">Iniciar investigación</button>
+    <label for="nombre">Nombre del jugador o del equipo:</label>
+    <input id="nombre" placeholder="Escribe aquí" maxlength="30">
+    <button onclick="comenzar()"><i class="ic" data-n="flecha"></i> Iniciar juego</button>
   </section>
 
-  <section class="panel hidden" id="juego">
-    <div class="eyebrow" id="etiqueta">Misión 1</div>
-    <h2 id="titulo"></h2>
-    <p id="instruccion"></p>
-
-    <div class="stats">
-      <div class="stat">Detective: <span id="jugador"></span></div>
-      <div class="stat">Puntos: <span id="puntos">0</span></div>
-      <div class="stat">Insignias: <span id="cantidad">0</span></div>
+  <section class="oculto" id="juego">
+    <div class="panel">
+      <div id="escena"></div>
+      <div id="retroalimentacion" class="feedback oculto" aria-live="polite"></div>
+      <div id="acciones"></div>
     </div>
-
-    <div class="progress"><div id="barra"></div></div>
-
-    <div id="contenido"></div>
-    <div id="retroalimentacion" class="feedback hidden"></div>
-
-    <button class="secondary" onclick="pista()">Consultar una pista</button>
-    <button id="continuar" class="hidden" onclick="siguiente()">
-      Continuar misión
-    </button>
-    <button class="secondary" onclick="mostrarMapa()">Ver mapa de misiones</button>
   </section>
 
-  <section class="panel hidden" id="mapa">
-    <div class="eyebrow">Tablero de investigación</div>
-    <h2>Mapa de misiones</h2>
-    <p>Selecciona una misión disponible para continuar tu investigación.</p>
-    <div id="misiones" class="mission-grid"></div>
-    <button onclick="volverJuego()">Volver a la misión</button>
-  </section>
-
-  <section class="panel hidden" id="final">
-    <div class="eyebrow">Expediente completado</div>
-    <h2>¡Investigación finalizada!</h2>
+  <section class="panel oculto" id="victoria">
+    <h2>¡Llegaste al caldero mágico! <i class="ic" data-n="caldero" data-px="3"></i></h2>
     <p id="resumen"></p>
-    <div class="story-box">
-      <h3>Reto final: crea tu propio escenario</h3>
-      <p>
-        Imagina un lugar misterioso. Describe dónde ocurre una historia,
-        qué detalles se observan y qué sensaciones produce el ambiente.
-      </p>
-      <textarea id="creacion" rows="5"
-        placeholder="Mi historia comienza en..."></textarea>
-      <button onclick="guardarCreacion()">Guardar mi creación</button>
-      <div id="mensajeFinal"></div>
+    <div class="rango" id="rango"></div>
+    <div class="insignias" id="insigniasFinales"></div>
+    <div id="pasoPocion" class="nota">
+      <h3>Reto final: la poción de los dulces</h3>
+      <p>La bruja reunió seis ingredientes. Ahora prepara una poción para compartir dulces con los niños de sexto.</p>
+      <div class="insignias" id="ingredientesFinal"></div>
+      <label>1. Elige 3 dulces para la fiesta:</label>
+      <div class="dulces" id="dulces"></div>
+      <label for="nomPocion">2. Ponle nombre a tu poción:</label>
+      <input id="nomPocion" maxlength="40" placeholder="Poción de la dulce amistad">
+      <label for="creacion">3. Describe el lugar de la fiesta: dónde es, cómo es el ambiente y qué se ve, se oye o se huele.</label>
+      <textarea id="creacion" rows="5" placeholder="La fiesta de dulces ocurre en..."></textarea>
+      <button onclick="prepararPocion()"><i class="ic" data-n="pocion"></i> Preparar poción</button>
+      <div id="mensajeFinal" aria-live="polite"></div>
     </div>
-    <div class="badges" id="insigniasFinales"></div>
-    <button onclick="reiniciar()">Jugar de nuevo</button>
+    <div id="resultado" class="oculto">
+      <div class="caldero" id="caldero"></div>
+      <div id="cargaPocion" aria-live="polite"></div>
+      <div class="nota oculto" id="tarjeta"></div>
+      <div id="acRes" class="oculto">
+        <button onclick="copiarReceta()">Copiar receta</button>
+        <button class="suave" onclick="window.print()">Imprimir tarjeta</button>
+        <div id="mensajeCopia"></div>
+      </div>
+    </div>
+    <button class="suave" onclick="comenzar()"><i class="ic" data-n="volver"></i> Jugar de nuevo</button>
+  </section>
+
+  <section class="panel oculto" id="derrota">
+    <h2>Game over <i class="ic" data-n="nube" data-px="3"></i></h2>
+    <p id="resumenDerrota"></p>
+    <p>Repasa las explicaciones y prueba otra estrategia. ¡Un buen detective vuelve a intentarlo!</p>
+    <button onclick="comenzar()"><i class="ic" data-n="volver"></i> Continuar</button>
   </section>
 </main>
 
-<footer>
-  Español · Sexto grado · Aprende investigando, leyendo e imaginando.
-</footer>
+<footer>Español · Sexto grado · Aprende investigando, leyendo e imaginando.</footer>
 
 <script>
-const retos = [
-  {
-    titulo: "La estación abandonada",
-    instruccion: "Lee la pista y descubre dónde ocurre la escena.",
-    texto: "El tren dejó de funcionar hace años. Las bancas están cubiertas de polvo y un reloj detenido cuelga sobre la taquilla.",
-    pregunta: "¿Cuál es el espacio físico de esta escena?",
-    opciones: [
-      "Una estación de tren abandonada",
-      "Una playa durante el verano",
-      "Una cocina familiar",
-      "Un salón de clases"
-    ],
-    correcta: 0,
-    pista: "Busca el lugar donde normalmente llegan y salen los trenes.",
-    explicacion: "Las bancas, la taquilla y el reloj ayudan a identificar una estación de tren."
-  },
-  {
-    titulo: "La casa de los susurros",
-    instruccion: "Identifica cómo se siente el espacio descrito.",
-    texto: "Las cortinas se movían aunque las ventanas estaban cerradas. Un ruido recorría el pasillo oscuro y nadie se atrevía a entrar.",
-    pregunta: "¿Qué ambiente predomina en el lugar?",
-    opciones: [
-      "Alegre y festivo",
-      "Misterioso e inquietante",
-      "Tranquilo y divertido",
-      "Deportivo y competitivo"
-    ],
-    correcta: 1,
-    pista: "Piensa en las emociones que producen el pasillo oscuro y los ruidos extraños.",
-    explicacion: "La oscuridad y los sonidos inexplicables crean un ambiente de misterio."
-  },
-  {
-    titulo: "El mercado de los colores",
-    instruccion: "Reconoce el espacio a partir de los detalles.",
-    texto: "Los vendedores ofrecían frutas, las personas negociaban los precios y el aroma del pan recién horneado recorría los puestos.",
-    pregunta: "¿En qué lugar sucede la escena?",
-    opciones: [
-      "En un hospital",
-      "En un bosque solitario",
-      "En un mercado",
-      "En un laboratorio"
-    ],
-    correcta: 2,
-    pista: "Los vendedores, los precios y los puestos son claves.",
-    explicacion: "La presencia de vendedores y puestos de productos caracteriza un mercado."
-  },
-  {
-    titulo: "El mensaje bajo la lluvia",
-    instruccion: "Distingue el espacio físico de las condiciones ambientales.",
-    texto: "Camila esperaba bajo el techo de una parada mientras la lluvia golpeaba el pavimento de la avenida.",
-    pregunta: "¿Cuál es el espacio físico principal?",
-    opciones: [
-      "Una parada junto a una avenida",
-      "Una montaña nevada",
-      "Un salón de baile",
-      "Una biblioteca subterránea"
-    ],
-    correcta: 0,
-    pista: "Identifica el lugar en el que Camila está esperando.",
-    explicacion: "La parada y la avenida constituyen el espacio físico de la escena; la lluvia es una condición ambiental."
-  },
-  {
-    titulo: "El jardín escondido",
-    instruccion: "Analiza los detalles que construyen el escenario.",
-    texto: "Detrás de una puerta cubierta de enredaderas, Tomás encontró flores violetas, una fuente y caminos de piedra.",
-    pregunta: "¿Qué detalle permite imaginar mejor el espacio?",
-    opciones: [
-      "Tomás tenía hambre",
-      "La puerta era antigua",
-      "Había flores, una fuente y caminos de piedra",
-      "Alguien contó una historia"
-    ],
-    correcta: 2,
-    pista: "Busca las palabras que describen lo que se puede ver en el lugar.",
-    explicacion: "Los elementos visibles permiten al lector construir una imagen mental del jardín."
-  },
-  {
-    titulo: "La ciudad sin sonidos",
-    instruccion: "Relaciona el escenario con la sensación que produce.",
-    texto: "En las calles no circulaban vehículos, las tiendas estaban cerradas y ni siquiera se escuchaban pájaros.",
-    pregunta: "¿Qué sensación produce este espacio?",
-    opciones: [
-      "Mucho movimiento y celebración",
-      "Silencio y soledad",
-      "Emoción por un partido",
-      "Ruido de una fábrica"
-    ],
-    correcta: 1,
-    pista: "Imagina una ciudad sin personas, vehículos ni sonidos.",
-    explicacion: "La ausencia de movimiento y sonidos crea una sensación de silencio y soledad."
-  },
-  {
-    titulo: "El refugio de la montaña",
-    instruccion: "Reconoce los elementos del escenario natural.",
-    texto: "El viento golpeaba las paredes de madera. Afuera, la neblina cubría los pinos y el sendero desaparecía entre las rocas.",
-    pregunta: "¿Qué elemento corresponde al espacio natural?",
-    opciones: [
-      "Las paredes de madera",
-      "La puerta del refugio",
-      "La neblina y los pinos",
-      "La lámpara de la habitación"
-    ],
-    correcta: 2,
-    pista: "Diferencia los elementos de la construcción de los elementos de la naturaleza.",
-    explicacion: "La neblina y los pinos pertenecen al entorno natural que rodea el refugio."
-  },
-  {
-    titulo: "El escenario perdido",
-    instruccion: "Aplica lo aprendido para reconstruir una historia.",
-    texto: "Una niña encontró una llave brillante junto a un puente antiguo. Al otro lado se veía una torre rodeada de árboles.",
-    pregunta: "¿Qué descripción ayudaría a construir mejor el espacio narrativo?",
-    opciones: [
-      "La niña estaba emocionada",
-      "El puente tenía piedras húmedas y musgo entre sus grietas",
-      "La niña quería descubrir un secreto",
-      "Su hermano era muy curioso"
-    ],
-    correcta: 1,
-    pista: "Elige una descripción que añada detalles concretos del lugar.",
-    explicacion: "Las piedras y el musgo permiten imaginar con mayor precisión el puente."
+/* ================= ICONOS PIXEL ART (reemplazan a los emojis) ================= */
+const ICO_PAL = { k:"#0a0820", R:"#ff4d6d", r:"#ffa3b5", Y:"#ffd23f", y:"#fff3a0", O:"#d9a21a", G:"#5bd75b", g:"#2f8f55",
+                  B:"#3a6fff", b:"#7fa6ff", C:"#3ef0ff", W:"#f4f4ff", S:"#a9a7d6", s:"#55556b", N:"#8a5a2b", n:"#c98a4b",
+                  P:"#9b5cff", p:"#6b3fd4", F:"#ff7a1a", f:"#ffb52e", D:"#3a3a52", A:"currentColor" };
+const ICONOS = {
+  corazon: [".RRR.RRR.","RrRRRRRRR","RrRRRRRRR","RRRRRRRRR",".RRRRRRR.","..RRRRR..","...RRR...","....R...."],
+  estrella: ["....Y....","....Y....","...YyY...","YYYYyYYYY",".YYyyYYY.","..YYyYY..","..YYYYY..",".YYY.YYY.",".YY...YY."],
+  linterna: ["...S...","..SSS..",".SSSSS.",".SYyYS.",".SyYYS.",".SYYyS.",".SYyYS.",".SSSSS.","..sss.."],
+  tijeras: ["S.......S","SS.....SS",".SS...SS.","..SS.SS..","...SSS...","..SS.SS..",".RR...RR.","RR.....RR","R.......R"],
+  fuego: ["...F....","...FF...","..FFF...","..FFFF.F",".FFfFFFF",".FFffFFF","FFFffFFF","FFffffFF",".FFffFF.","..FFFF.."],
+  luna: ["..YYY...",".YYY....","YYY.....","YYY.....","YYY.....","YYYY....",".YYYYYY.","..YYYY.."],
+  hoja: ["......GG","....GGgG","...GGGgG","..GGGgG.",".GGGgG..","GGGgG...",".NG.....","N......."],
+  flecha: ["A....","AA...","AAA..","AAAA.","AAA..","AA...","A...."],
+  volver: ["....A","...AA","..AAA",".AAAA","..AAA","...AA","....A"],
+  medalla: ["..R...R..","..RR.RR..","...RRR...","..OOOOO..",".OYYYYYO.",".OYyYYYO.",".OYYYYYO.","..OYYYO..","...OOO..."],
+  trofeo: ["OYYYYYYYYYO","OYyyYYYYYYO",".OYyYYYYYO.","..OYyYYYO..","...OYYYO...","....OYO....",".....Y.....",".....Y.....","...OOOOO...","..OOOOOOO.."],
+  nube: ["..SSS.......",".SSSSS.SSS..","SSSSSSSSSSS.","SSSSSSSSSSSS",".SSSSSSSSSS."],
+  estacion: ["...kkkkk...","..kRRRRRk..","..kRWWWRk..","..kRWWWRk..","..kRRRRRk..","..kYRRRYk..","..kRRRRRk..","..kSSSSSk..",".kSSkkkSSk.","..kk...kk.."],
+  casa: ["....PP.....","...PPPP....","..PPPPPP...",".PPPPPPPP..","PPPPPPPPPP.",".NNNNNNNN..",".NYYNNYYN..",".NYYNNYYN..",".NNNkkNNN..",".NNNkkNNN.."],
+  bosque: ["....g....","...gGg...","..gGGGg..","...gGg...","..gGGGg..",".gGGGGGg.","...gGg...",".gGGGGGg.","gGGGGGGGg","....N....","....N...."],
+  cueva: ["...SSSSS...",".SSSSSSSSS.","SSSSSSSSSSS","SSSSkkkSSSS","SSSkkkkkSSS","SSkkkkkkkSS","SSkkkkkkkSS","SSkkkkkkkSS","sSkkkkkkkSs"],
+  puente: ["...NNNNN...",".NNnnnnnNN.","NNn.....nNN","Nn.......nN","BBBBBBBBBBB","bBbBbBbBbBb","BBBBBBBBBBB"],
+  torre: ["SS.SS.SS.","SSSSSSSSS",".SSSSSSS.",".SSYYYSS.",".SSYYYSS.",".SSSSSSS.",".SSSSSSS.",".SSSkkSS.",".SSSkkSS.",".SSSkkSS."]
+};
+ICONOS.corazonVacio = ICONOS.corazon.map(f => f.replace(/R/g, "s").replace(/r/g, "S"));
+Object.assign(ICONOS, {
+  reloj: [".SSSSS.","SWWkWWS","SWWkWWS","SWWkkWS","SWWWWWS",".SSSSS."],
+  telarana: ["W.W.W.W",".W.W.W.","..WWW..","WWWWWWW","..WWW..",".W.W.W.","W.W.W.W"],
+  cristal: ["...C...","..CbC..",".CbCCC.","CbCCCCC",".CCCCC.","..CCC..","...C..."],
+  gota: ["...B...","..BBB..","..BbB..",".BBbBB.",".BBBBB.","..BBB.."],
+  pluma: ["......P",".....PP","....PPp","...PPp.","..PPp..",".PPp...","NN....."],
+  caldero: ["..kkkkkkk..",".kSSSSSSSk.","kGGgGGGgGGk","kDDDDDDDDDk","kDDDDDDDDDk",".kDDDDDDDk.","..k.....k.."],
+  pocion: ["...SS...","...SS...","..SSSS..",".SPPPPS.","SPPpPPPS","SPPPPPPS",".SSSSSS."],
+  dulce: ["R.....R","RR.R.RR","RRRrRRR","RRRRRRR","RR.R.RR","R.....R"],
+  paleta: ["..BBB..",".BbBBB.","BBBBBBB",".BBBBB.","..BBB..","...W...","...W...","...W..."],
+  galleta: [".NNNNN.","NnNNnNN","NNNnNNN","NnNNNnN",".NNNNN."],
+  chocolate: ["NNNNNN","NnNnNn","NNNNNN","NnNnNn","NNNNNN"],
+  gomita: [".GGGG.","GgGGGG","GGGGGG","GGGGGG",".GGGG."],
+  malvavisco: [".WWWW.","WWWWWW","WSWWWW","WWWWWW",".WWWW."]
+});
+
+
+function ico(n, px, pal) {
+  const f = ICONOS[n]; px = px || 2;
+  const w = f[0].length, h = f.length;
+  let r = "";
+  f.forEach((fila, y) => {
+    let x = 0;
+    while (x < w) {
+      const ch = fila[x];
+      if (ch === ".") { x++; continue; }
+      let k = 1; while (x + k < w && fila[x + k] === ch) k++;
+      r += `<rect x="${x}" y="${y}" width="${k}" height="1" fill="${(pal && pal[ch]) || ICO_PAL[ch]}"/>`;
+      x += k;
+    }
+  });
+  return `<svg class="ico" style="width:${w * px}px;height:${h * px}px" viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
+/* rellena los iconos escritos en el HTML: <i class="ic" data-n="corazon" data-px="2"></i> */
+function iconosEstaticos() {
+  document.querySelectorAll("i.ic[data-n]").forEach(e => { e.innerHTML = ico(e.dataset.n, +e.dataset.px || 2); });
+}
+const _icoRuns = {};
+function dibujarIcono(c, n, cx, cy, esc) {
+  if (!_icoRuns[n]) {
+    const r = [];
+    ICONOS[n].forEach((fila, y) => {
+      let x = 0;
+      while (x < fila.length) {
+        const ch = fila[x];
+        if (ch === ".") { x++; continue; }
+        let k = 1; while (x + k < fila.length && fila[x + k] === ch) k++;
+        r.push([x, y, k, ICO_PAL[ch]]); x += k;
+      }
+    });
+    _icoRuns[n] = r;
   }
+  const w = ICONOS[n][0].length, h = ICONOS[n].length;
+  const x0 = Math.round(cx - w * esc / 2), y0 = Math.round(cy - h * esc / 2);
+  _icoRuns[n].forEach(([x, y, k, col]) => { c.fillStyle = col; c.fillRect(x0 + x * esc, y0 + y * esc, k * esc, esc); });
+}
+
+/* Cada obstáculo tiene 8 preguntas.
+   t = texto de la pista, p = pregunta, o = opciones, c = índice de la correcta,
+   h = pista de la linterna, e = explicación */
+const obstaculos = [
+  { titulo: "La estación de los lugares", icono: "estacion", tema: "Reconocer dónde ocurre la historia", preguntas: [
+    { t: "El tren dejó de funcionar hace años. Las bancas están cubiertas de polvo y un reloj detenido cuelga sobre la taquilla.",
+      p: "¿Cuál es el espacio físico de esta escena?",
+      o: ["Una estación de tren abandonada", "Una playa durante el verano", "Una cocina familiar", "Un salón de clases"], c: 0,
+      h: "Busca el lugar donde normalmente llegan y salen los trenes.",
+      e: "Las bancas, la taquilla y el reloj ayudan a identificar una estación de tren." },
+    { t: "Los vendedores ofrecían frutas, las personas negociaban los precios y el aroma del pan recién horneado recorría los puestos.",
+      p: "¿En qué lugar sucede la escena?",
+      o: ["En un hospital", "En un bosque solitario", "En un mercado", "En un laboratorio"], c: 2,
+      h: "Los vendedores, los precios y los puestos son claves.",
+      e: "La presencia de vendedores y puestos de productos caracteriza un mercado." },
+    { t: "Camila esperaba bajo el techo de una parada mientras la lluvia golpeaba el pavimento de la avenida.",
+      p: "¿Cuál es el espacio físico principal?",
+      o: ["Una parada junto a una avenida", "Una montaña nevada", "Un salón de baile", "Una biblioteca subterránea"], c: 0,
+      h: "Identifica el lugar en el que Camila está esperando.",
+      e: "La parada y la avenida son el espacio físico; la lluvia es una condición ambiental." },
+    { t: "Los pasillos estaban vacíos. Solo la luz de la luna entraba por las ventanas del segundo piso y los pupitres parecían sombras quietas.",
+      p: "¿Qué lugar se describe?",
+      o: ["Un estadio lleno de gente", "Una granja al amanecer", "Un aeropuerto", "Un colegio de noche"], c: 3,
+      h: "Fíjate en los pasillos, los pupitres y las ventanas.",
+      e: "Los pasillos y los pupitres indican que es un colegio; la luna indica que es de noche." },
+    { t: "Las olas chocaban contra las rocas y el faro giraba su luz sobre el mar. Las gaviotas gritaban sobre la arena.",
+      p: "¿Qué tipo de espacio se describe?",
+      o: ["Un desierto sin agua", "Una costa junto al mar", "Una cueva subterránea", "Una oficina"], c: 1,
+      h: "Las olas, las gaviotas y la arena aparecen en un mismo lugar.",
+      e: "Las olas, la arena, el faro y las gaviotas son típicos de una costa." },
+    { t: "Los pacientes esperaban en silencio y olía a alcohol. Una enfermera caminaba rápido por el corredor.",
+      p: "¿Dónde sucede la escena?",
+      o: ["En una biblioteca", "En un circo", "En un hospital o clínica", "En un parque"], c: 2,
+      h: "Fíjate en los pacientes, el alcohol y la enfermera.",
+      e: "Pacientes, enfermera y olor a alcohol indican un hospital o una clínica." },
+    { t: "El gallo cantó al amanecer. Las vacas salían del establo mientras el campesino llenaba los baldes con leche fresca.",
+      p: "¿Dónde sucede la escena?",
+      o: ["En una granja", "En un aeropuerto", "En un museo", "En una discoteca"], c: 0,
+      h: "Piensa dónde viven el gallo y las vacas.",
+      e: "El gallo, el establo y las vacas indican que es una granja." },
+    { t: "Entre los estantes llenos de libros, Ana susurraba para no molestar. La bibliotecaria sellaba los préstamos en el mostrador.",
+      p: "¿Cuál es el espacio de esta escena?",
+      o: ["Un gimnasio", "Una piscina", "Una cafetería", "Una biblioteca"], c: 3,
+      h: "Fíjate en los estantes, los libros y los préstamos.",
+      e: "Los estantes con libros y el sellado de préstamos son propios de una biblioteca." }
+  ]},
+  { titulo: "La casa de los ambientes", icono: "casa", tema: "Descubrir el ambiente y las sensaciones", preguntas: [
+    { t: "Las cortinas se movían aunque las ventanas estaban cerradas. Un ruido recorría el pasillo oscuro y nadie se atrevía a entrar.",
+      p: "¿Qué ambiente predomina en el lugar?",
+      o: ["Alegre y festivo", "Misterioso e inquietante", "Tranquilo y divertido", "Deportivo y competitivo"], c: 1,
+      h: "Piensa en las emociones que producen el pasillo oscuro y los ruidos extraños.",
+      e: "La oscuridad y los sonidos inexplicables crean un ambiente de misterio." },
+    { t: "En las calles no circulaban vehículos, las tiendas estaban cerradas y ni siquiera se escuchaban pájaros.",
+      p: "¿Qué sensación produce este espacio?",
+      o: ["Mucho movimiento y celebración", "Silencio y soledad", "Emoción por un partido", "Ruido de una fábrica"], c: 1,
+      h: "Imagina una ciudad sin personas, vehículos ni sonidos.",
+      e: "La ausencia de movimiento y sonidos crea una sensación de silencio y soledad." },
+    { t: "El estruendo de los gritos hacía temblar las gradas. Las banderas ondeaban y el olor a empanadas llegaba desde la entrada.",
+      p: "¿Qué ambiente se crea en este espacio?",
+      o: ["Calma y silencio", "Miedo y soledad", "Tristeza y nostalgia", "Bullicio y emoción"], c: 3,
+      h: "Piensa en los gritos, las banderas y la multitud.",
+      e: "Los gritos y las banderas crean un ambiente de bullicio y emoción." },
+    { t: "Las risas rebotaban entre los salones y el balón rodaba por la cancha. Los niños corrían hacia la tienda escolar.",
+      p: "¿Qué ambiente se percibe?",
+      o: ["Alegre y animado", "Triste y callado", "Peligroso y tenso", "Misterioso"], c: 0,
+      h: "Piensa en las risas y en el balón rodando.",
+      e: "Las risas y el juego crean un ambiente alegre y animado." },
+    { t: "La tierra temblaba y una columna de humo gris se elevaba desde el cráter. Los habitantes del pueblo cercano corrían hacia el río.",
+      p: "¿Qué ambiente predomina?",
+      o: ["De fiesta", "De aburrimiento", "De ternura", "De peligro y tensión"], c: 3,
+      h: "¿Cómo se sentirían las personas que corren mientras la tierra tiembla?",
+      e: "El temblor, el humo y la huida de la gente crean un ambiente de peligro." },
+    { t: "La abuela servía el almuerzo mientras todos reían y se pasaban los platos en la mesa grande del patio.",
+      p: "¿Qué ambiente tiene este espacio?",
+      o: ["Frío y distante", "Familiar y cálido", "Solitario", "Peligroso"], c: 1,
+      h: "Piensa en una familia reunida alrededor de la mesa.",
+      e: "La mesa compartida y las risas crean un ambiente familiar y cálido." },
+    { t: "Un trueno retumbó y la luz se fue. Las ramas golpeaban la ventana mientras la lluvia caía sin parar.",
+      p: "¿Qué ambiente se crea?",
+      o: ["Tenso y de suspenso", "Festivo y alegre", "Aburrido y monótono", "Divertido y relajado"], c: 0,
+      h: "Piensa en el trueno, la oscuridad y las ramas golpeando.",
+      e: "El trueno, la falta de luz y los golpes en la ventana generan tensión y suspenso." },
+    { t: "Las olas llegaban suaves, el cielo se pintaba de naranja y una brisa tibia movía las palmeras.",
+      p: "¿Qué ambiente transmite el lugar?",
+      o: ["Peligroso y violento", "Tranquilo y relajante", "Ruidoso y caótico", "Frío y solitario"], c: 1,
+      h: "Las olas suaves y la brisa tibia sugieren calma.",
+      e: "Las olas suaves, los colores del atardecer y la brisa crean un ambiente de calma." }
+  ]},
+  { titulo: "El bosque de los espacios", icono: "bosque", tema: "Espacios abiertos, cerrados, naturales e imaginarios", preguntas: [
+    { t: "Gotas de agua caían desde el techo de roca. La linterna de Sara apenas iluminaba las paredes húmedas y frías.",
+      p: "¿Es un espacio abierto o cerrado?",
+      o: ["Abierto: un campo sin límites", "Cerrado: una cueva con techo y paredes de roca", "Abierto: una plaza amplia", "Abierto: una playa"], c: 1,
+      h: "Busca las palabras techo y paredes.",
+      e: "El techo y las paredes de roca indican un espacio cerrado." },
+    { t: "Hasta donde alcanzaba la vista solo había arena dorada. El sol quemaba y no se veía ni una sombra.",
+      p: "¿Qué espacio abierto se describe?",
+      o: ["Un bosque frondoso", "Un museo", "Un desierto", "Un submarino"], c: 2,
+      h: "Piensa dónde hay arena, sol fuerte y ninguna sombra.",
+      e: "La arena dorada, el sol y la falta de sombra describen un desierto." },
+    { t: "En el planeta Zuli, los ríos eran de luz y las casas flotaban sobre nubes violetas.",
+      p: "¿Qué tipo de espacio es?",
+      o: ["Real y cotidiano", "Imaginario, creado por el autor", "Un lugar de la escuela", "Un museo de historia"], c: 1,
+      h: "¿Existen ríos de luz y casas flotantes en la vida real?",
+      e: "Es un espacio imaginario, inventado por el autor para la historia." },
+    { t: "El viento golpeaba las paredes de madera. Afuera, la neblina cubría los pinos y el sendero desaparecía entre las rocas.",
+      p: "¿Qué elemento corresponde al espacio natural?",
+      o: ["Las paredes de madera", "La puerta del refugio", "La neblina y los pinos", "La lámpara de la habitación"], c: 2,
+      h: "Diferencia los elementos de la construcción de los de la naturaleza.",
+      e: "La neblina y los pinos pertenecen al entorno natural que rodea el refugio." },
+    { t: "Las puertas se cerraron y Pablo quedó en una caja metálica con espejos y botones luminosos.",
+      p: "¿Qué tipo de espacio es?",
+      o: ["Abierto y amplio", "Cerrado y pequeño", "Natural", "Un campo de fútbol"], c: 1,
+      h: "Piensa si hay mucho espacio o si está limitado por paredes.",
+      e: "Las puertas cerradas y la caja metálica indican un espacio cerrado y pequeño." },
+    { t: "En medio de la plaza había una fuente y, alrededor, bancas bajo el cielo abierto.",
+      p: "¿Cómo se clasifica este espacio?",
+      o: ["Cerrado y privado", "Abierto y urbano", "Abierto y natural", "Imaginario"], c: 1,
+      h: "Hay cielo abierto, pero también una fuente y bancas construidas.",
+      e: "Es un espacio abierto, pero hecho por las personas, es decir, urbano." },
+    { t: "El lago de aguas verdes se extendía entre montañas y no había casas a la vista.",
+      p: "¿Qué tipo de espacio se describe?",
+      o: ["Un espacio natural", "Un espacio urbano", "Un espacio cerrado", "Un espacio imaginario"], c: 0,
+      h: "No aparece ninguna construcción.",
+      e: "Un lago y montañas sin casas forman un espacio natural." },
+    { t: "Los edificios eran de cristal, los autos volaban entre ellos y las calles brillaban con luz propia.",
+      p: "¿Qué tipo de espacio es?",
+      o: ["Un pueblo colonial", "Una ciudad futurista e imaginaria", "Una granja real", "Una playa"], c: 1,
+      h: "¿Existen hoy autos que vuelan y calles que brillan?",
+      e: "Autos voladores y calles luminosas pertenecen a un espacio futurista e imaginario." }
+  ]},
+  { titulo: "La cueva de los sentidos", icono: "cueva", tema: "Detalles y sentidos que construyen el escenario", preguntas: [
+    { t: "Al abrir la puerta, el olor a pan caliente y canela envolvió a Luis. El mostrador brillaba y la campanita sonó.",
+      p: "¿Qué sentido ayuda más a imaginar este lugar?",
+      o: ["El olfato, por el aroma del pan y la canela", "El gusto, porque Luis comió pan", "El tacto, porque tocó la puerta", "Ningún sentido"], c: 0,
+      h: "Lee otra vez la primera oración.",
+      e: "El aroma del pan y la canela apela al olfato y nos hace imaginar la panadería." },
+    { t: "Los árboles eran tan altos que tapaban el cielo. Las hojas crujían bajo los pies y se oía un búho a lo lejos.",
+      p: "¿Qué sentido se usa en: las hojas crujían y se oía un búho?",
+      o: ["La vista", "El oído", "El gusto", "El olfato"], c: 1,
+      h: "Piensa qué órgano sirve para percibir sonidos.",
+      e: "Crujir y oír son sonidos, es decir, información que percibe el oído." },
+    { t: "Detrás de una puerta cubierta de enredaderas, Tomás encontró flores violetas, una fuente y caminos de piedra.",
+      p: "¿Qué detalle permite imaginar mejor el espacio?",
+      o: ["Tomás tenía hambre", "La puerta era antigua", "Había flores, una fuente y caminos de piedra", "Alguien contó una historia"], c: 2,
+      h: "Busca las palabras que describen lo que se puede ver en el lugar.",
+      e: "Los elementos visibles permiten construir una imagen mental del jardín." },
+    { t: "Valeria llegó al parque.",
+      p: "¿Qué oración describe mejor el espacio?",
+      o: ["Valeria estaba cansada", "El parque tenía columpios oxidados, bancas de madera y un sendero lleno de hojas secas", "Valeria llegó el lunes", "A Valeria le gustaba jugar"], c: 1,
+      h: "Busca la oración que habla del parque y no de Valeria.",
+      e: "Los columpios, las bancas y las hojas secas son detalles concretos del lugar." },
+    { t: "Las torres del castillo se alzaban entre la niebla. Dentro, antorchas iluminaban salones con tapices antiguos.",
+      p: "¿Qué detalles dan sensación de antigüedad?",
+      o: ["Pantallas y computadores", "Autos y avenidas", "Antorchas y tapices antiguos", "Aviones y antenas"], c: 2,
+      h: "Piensa en objetos que ya no se usan hoy.",
+      e: "Las antorchas y los tapices antiguos sugieren un lugar de otra época." },
+    { t: "Las luces del panel parpadeaban en azul. Por la ventanilla, la Tierra era una canica lejana.",
+      p: "¿Qué recurso se usa en la frase: la Tierra era una canica lejana?",
+      o: ["Un diálogo entre personajes", "Una fecha exacta", "Una metáfora que muestra qué tan lejos está la Tierra", "Una instrucción"], c: 2,
+      h: "El autor compara la Tierra con otra cosa.",
+      e: "Comparar la Tierra con una canica ayuda al lector a imaginar su tamaño y su distancia." },
+    { t: "La cabaña tenía paredes viejas y un techo lleno de goteras. Era una cabaña ____.",
+      p: "¿Qué par de adjetivos completa mejor la descripción?",
+      o: ["vieja y deteriorada", "nueva y reluciente", "enorme y lujosa", "moderna y elegante"], c: 0,
+      h: "Fíjate en las paredes viejas y las goteras.",
+      e: "Las paredes viejas y las goteras muestran que la cabaña está deteriorada." },
+    { t: "El suelo estaba helado y áspero bajo sus pies descalzos, y la pared se sentía húmeda y rugosa.",
+      p: "¿Qué sentido se usa para describir este lugar?",
+      o: ["La vista", "El oído", "El tacto", "El gusto"], c: 2,
+      h: "Piensa en lo que se siente al tocar el suelo y la pared.",
+      e: "Helado, áspero, húmedo y rugoso son sensaciones que percibimos con el tacto." }
+  ]},
+  { titulo: "El puente del tiempo", icono: "puente", tema: "Ubicación, orden, tiempo y cambios de espacio", preguntas: [
+    { t: "Era una noche de invierno, en una cabaña al borde del lago.",
+      p: "¿Qué parte indica el espacio y cuál el tiempo?",
+      o: ["Espacio: invierno. Tiempo: lago", "Espacio: una noche. Tiempo: una cabaña", "Espacio: una cabaña al borde del lago. Tiempo: una noche de invierno", "Todo es tiempo"], c: 2,
+      h: "El espacio responde a la pregunta dónde y el tiempo a la pregunta cuándo.",
+      e: "La cabaña junto al lago es el lugar (espacio) y la noche de invierno es el momento (tiempo)." },
+    { t: "El gato dormía encima del armario, mientras el perro vigilaba debajo de la mesa.",
+      p: "¿Qué palabras ubican a los animales en el espacio?",
+      o: ["Dormía y vigilaba", "Encima y debajo", "Gato y perro", "Mientras y del"], c: 1,
+      h: "Busca las palabras que dicen la posición.",
+      e: "Encima y debajo son palabras que indican el lugar exacto de cada animal." },
+    { t: "Al salir de la biblioteca silenciosa, Daniel entró a la plaza llena de música y vendedores.",
+      p: "¿Qué cambio de espacio ocurre?",
+      o: ["De la ciudad al campo", "Del día a la noche", "De un lugar silencioso a uno bullicioso", "De un lugar bullicioso a uno silencioso"], c: 2,
+      h: "Compara la biblioteca con la plaza.",
+      e: "Daniel pasa de la calma de la biblioteca al ruido de la plaza." },
+    { t: "Para describir una habitación, el narrador quiere que el lector la imagine con claridad.",
+      p: "¿Qué orden ayuda más al lector?",
+      o: ["Mezclar detalles sin orden", "Solo decir que es bonita", "Recorrerla de un lado a otro: puerta, paredes, ventana, rincón", "Contar lo que pasó ayer"], c: 2,
+      h: "Imagina que haces un recorrido por la habitación.",
+      e: "Describir en orden espacial permite construir una imagen clara del lugar." },
+    { t: "Una niña encontró una llave brillante junto a un puente antiguo. Al otro lado se veía una torre rodeada de árboles.",
+      p: "¿Qué descripción ayudaría a construir mejor el espacio narrativo?",
+      o: ["La niña estaba emocionada", "El puente tenía piedras húmedas y musgo entre sus grietas", "La niña quería descubrir un secreto", "Su hermano era muy curioso"], c: 1,
+      h: "Elige una descripción que añada detalles concretos del lugar.",
+      e: "Las piedras y el musgo permiten imaginar con mayor precisión el puente." },
+    { t: "Cuando amaneció, los viajeros ya estaban en la cima de la montaña.",
+      p: "¿Qué expresión indica el tiempo y no el espacio?",
+      o: ["En la cima de la montaña", "Los viajeros", "La montaña", "Cuando amaneció"], c: 3,
+      h: "El tiempo responde a la pregunta cuándo.",
+      e: "Cuando amaneció indica el momento; la cima de la montaña indica el lugar." },
+    { t: "Primero cruzó el patio, luego subió la escalera y por último llegó al desván.",
+      p: "¿Qué muestra este recorrido?",
+      o: ["Cómo el personaje pasa de un espacio a otro", "Lo que el personaje siente", "La edad del personaje", "Una conversación"], c: 0,
+      h: "Observa las palabras primero, luego y por último junto con los lugares.",
+      e: "El texto sigue al personaje por varios espacios en orden." },
+    { t: "La plaza al mediodía vibraba de gente; a medianoche, estaba vacía y silenciosa.",
+      p: "¿Qué cambia en esta descripción?",
+      o: ["El lugar cambia por completo", "El ambiente del mismo lugar según el momento", "El nombre de la plaza", "El personaje principal"], c: 1,
+      h: "La plaza es la misma en los dos momentos.",
+      e: "El espacio es el mismo, pero su ambiente cambia entre el mediodía y la medianoche." }
+  ]},
+  { titulo: "La torre del relato", icono: "torre", tema: "El espacio y los personajes; escribir mejores descripciones", preguntas: [
+    { t: "Mateo sintió miedo al entrar al sótano porque estaba oscuro y olía a humedad.",
+      p: "¿Cómo influye el espacio en el personaje?",
+      o: ["Le provoca miedo", "No influye en nada", "Lo vuelve más alegre", "Hace que se duerma"], c: 0,
+      h: "Lee qué sintió Mateo al entrar.",
+      e: "La oscuridad y la humedad del lugar son la causa del miedo de Mateo." },
+    { t: "El detective subió los últimos escalones de la torre. Desde la ventana vio la ciudad, los tejados rojos y el río brillando al atardecer.",
+      p: "¿Qué elementos forman el espacio narrativo?",
+      o: ["Solo los pensamientos del detective", "La torre, la ciudad, los tejados y el río", "Solo el atardecer", "Solo los escalones"], c: 1,
+      h: "El espacio narrativo reúne los lugares y elementos físicos de la historia.",
+      e: "El espacio narrativo incluye todos los lugares y elementos físicos donde ocurre la historia." },
+    { t: "Lucía amaba el bosque; allí se sentía libre y tranquila.",
+      p: "¿Cómo influye el espacio en Lucía?",
+      o: ["Le da libertad y tranquilidad", "Le causa miedo", "La pone furiosa", "No tiene efecto"], c: 0,
+      h: "Lee cómo se siente Lucía en el bosque.",
+      e: "El bosque le transmite libertad y tranquilidad." },
+    { t: "Las ventanas tenían barrotes y la puerta se cerraba con tres candados. Julián se sentó en la cama sin mirar a nadie.",
+      p: "¿Qué sensación sugiere este espacio?",
+      o: ["Fiesta y alegría", "Encierro y tristeza", "Aventura y libertad", "Hambre"], c: 1,
+      h: "Piensa en lo que significan los barrotes y los candados.",
+      e: "Los barrotes y los candados producen sensación de encierro y tristeza." },
+    { t: "Un cuento necesita decir dónde ocurre la historia.",
+      p: "¿Para qué sirve describir el espacio en un cuento?",
+      o: ["Para que el lector imagine el lugar y sienta su ambiente", "Para llenar páginas", "Para que no haya personajes", "Para cambiar el final"], c: 0,
+      h: "Piensa qué logra el lector al imaginar el lugar.",
+      e: "Describir el espacio ayuda al lector a imaginar dónde ocurre la historia y a sentir su ambiente." },
+    { t: "Antes de escribir, un detective del lenguaje se hace preguntas para imaginar el escenario.",
+      p: "¿Cuál pregunta ayuda más a construir el espacio?",
+      o: ["¿Cuántas páginas tendrá el cuento?", "¿Cómo es el lugar y qué se ve, se oye o se huele allí?", "¿Quién publicó el libro?", "¿Cuántos años tiene el autor?"], c: 1,
+      h: "Busca la pregunta sobre el lugar y los sentidos.",
+      e: "Preguntarse cómo es el lugar y qué se percibe en él ayuda a construir el escenario." },
+    { t: "Un escritor debe elegir el inicio que presente mejor el escenario de su cuento.",
+      p: "¿Cuál es el mejor inicio?",
+      o: ["Elena esperaba.", "Todos los niños tienen sueños.", "Una madrugada fría, en un puerto lleno de barcos dormidos, Elena esperaba una carta.", "Fin del cuento."], c: 2,
+      h: "Busca el que dice dónde y cómo es el lugar.",
+      e: "El tercer inicio muestra el tiempo, el lugar y detalles del ambiente." },
+    { t: "Marta quiere describir un atardecer con precisión.",
+      p: "¿Qué expresión lo describe mejor?",
+      o: ["Un atardecer bonito", "Un atardecer normal", "Un atardecer", "Un cielo naranja y violeta sobre los tejados"], c: 3,
+      h: "Busca la que da colores y lugar.",
+      e: "Los colores y el lugar permiten imaginar el atardecer, mientras que bonito es muy general." }
+  ]}
 ];
 
-let jugador = "Detective";
-let puntos = 0;
-let indice = 0;
-let respondidas = [];
-let insignias = [];
-let bloqueado = false;
-let ultimo = 0;
+/* ---------- Ingredientes mágicos: uno por obstáculo ---------- */
+const INGREDIENTES = [
+  { n: "Polvo del reloj detenido", i: "reloj", d: "da paciencia para esperar el turno de los dulces" },
+  { n: "Telaraña encantada", i: "telarana", d: "une a todo el grupo en una misma fiesta" },
+  { n: "Hoja del bosque susurrante", i: "hoja", d: "deja un aroma fresco de menta" },
+  { n: "Cristal de la cueva", i: "cristal", d: "hace brillar cada dulce" },
+  { n: "Gota del río roto", i: "gota", d: "refresca la mezcla" },
+  { n: "Pluma de la torre", i: "pluma", d: "hace que la poción flote y huela a vainilla" }
+];
+obstaculos.forEach((o, k) => { o.ing = INGREDIENTES[k]; });
+const DULCES = [
+  { n: "Caramelos de colores", i: "dulce" }, { n: "Paletas de sabores", i: "paleta" }, { n: "Galletas de canela", i: "galleta" },
+  { n: "Chocolatinas", i: "chocolate" }, { n: "Gomitas frutales", i: "gomita" }, { n: "Malvaviscos", i: "malvavisco" }
+];
+const SEL = new Set();
+let RECETA = "";
 
-function ocultarTodo() {
-  ["inicio", "juego", "mapa", "final"].forEach(id => {
-    document.getElementById(id).classList.add("hidden");
-  });
+/* ---------- Sonido 8-bit (se puede apagar) ---------- */
+let audioCtx = null, sonidoOn = true;
+function pitido(f, d, tipo) {
+  if (!sonidoOn) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = tipo || "square"; o.frequency.value = f; g.gain.value = .05;
+    o.connect(g); g.connect(audioCtx.destination);
+    g.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + d);
+    o.start(); o.stop(audioCtx.currentTime + d);
+  } catch (e) {}
+}
+function melodia(notas) { notas.forEach((f, i) => setTimeout(() => pitido(f, .14), i * 110)); }
+function alternarSonido() { sonidoOn = !sonidoOn; $("bSonido").textContent = sonidoOn ? "Sonido: sí" : "Sonido: no"; }
+document.addEventListener("keydown", e => {
+  if (!E || e.target.matches("input, textarea") || e.ctrlKey || e.metaKey || e.altKey) return;
+  const i = "abcd".indexOf(e.key.toLowerCase());
+  const b = i >= 0 && document.querySelectorAll(".option")[i];
+  if (b && !b.disabled) b.click();
+});
+
+const NP = 8, MINIMO = 5, VIDAS = 5;
+const TOTAL = obstaculos.length + 2;
+let E = null;
+const $ = id => document.getElementById(id);
+
+function mostrar(id) {
+  ["inicio", "juego", "victoria", "derrota"].forEach(s => $(s).classList.add("oculto"));
+  $(id).classList.remove("oculto");
+  $("mundo").classList.toggle("inicio", id === "inicio");
+  enInicio = id === "inicio";
+  W.hover = id === "inicio";
+  window.scrollTo({ top: 0 });
+}
+
+function mezclar(n) {
+  const a = [...Array(n).keys()];
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 function comenzar() {
-  jugador = document.getElementById("nombre").value.trim() || "Detective";
-  puntos = 0;
-  indice = 0;
-  respondidas = [];
-  insignias = [];
-  bloqueado = false;
-  ocultarTodo();
-  document.getElementById("juego").classList.remove("hidden");
-  dibujarReto();
+  const nombre = $("nombre").value.trim() || (E && E.nombre) || "Detective";
+  E = {
+    nombre, vidas: VIDAS, puntos: 0, pistas: 5, comodines: 3,
+    o: 0, q: 0, pos: 1, vis: 0, racha: 0, ruta: null,
+    aciertosObs: 0, ptsObs: 0, aciertosTot: 0, pips: [], ordenQ: [],
+    ins: [], ing: [], quitadas: [], usoPista: false, uso5050: false, bloq: false, orden: []
+  };
+  mostrar("juego");
+  mostrarObstaculo();
 }
 
-function dibujarReto() {
-  const reto = retos[indice];
-  bloqueado = false;
-  ultimo = indice;
+function pintarRecursos() {
+  $("recursos").innerHTML =
+    `<div class="dato"><span class="mini">${svgPixeles(CUERPO.concat(PIES_A))}</span><span id="rNombre"></span></div>` +
+    `<div class="dato">${Array.from({ length: VIDAS }, (_, i) => ico(i < E.vidas ? "corazon" : "corazonVacio", 2)).join("")}</div>` +
+    `<div class="dato">${ico("estrella", 2)} ${E.puntos}</div>` +
+    `<div class="dato">${ico("linterna", 2)} ${E.pistas}</div>` +
+    `<div class="dato">${ico("tijeras", 2)} ${E.comodines}</div>` +
+    (E.racha >= 2 ? `<div class="dato">${ico("fuego", 2)} x${E.racha}</div>` : "");
+  $("rNombre").textContent = E.nombre;
+  $("hudIng").innerHTML = obstaculos.map((o, k) => k < E.ing.length
+    ? `<div class="ing-slot lleno" title="${o.ing.n}">${ico(o.ing.i, 2)}</div>`
+    : `<div class="ing-slot" title="Ingrediente por reclamar">?</div>`).join("");
+  $("hudDer").innerHTML = `<div class="dato">${ico("luna", 2)} Obstáculo ${Math.min(E.o + 1, obstaculos.length)}/${obstaculos.length}</div>`;
+}
 
-  document.getElementById("etiqueta").textContent =
-    `Misión ${indice + 1} de ${retos.length}`;
-  document.getElementById("titulo").textContent = reto.titulo;
-  document.getElementById("instruccion").textContent = reto.instruccion;
-  document.getElementById("jugador").textContent = jugador;
-  document.getElementById("puntos").textContent = puntos;
-  document.getElementById("cantidad").textContent = insignias.length;
-  document.getElementById("barra").style.width =
-    `${(indice / retos.length) * 100}%`;
+/* ---------- Sprites pixel de la bruja ---------- */
+const PAL = { h:"#9b5cff", H:"#ffd23f", s:"#ffcf9f", r:"#ff7a3d", e:"#14102e", m:"#e0486a",
+              d:"#b46bff", C:"#ffd23f", b:"#ff4d6d", y:"#ffd23f", B:"#ff4d6d", w:"#c98a4b" };
+const CUERPO = [
+  ".......hh.....",
+  "......hhh.....",
+  ".....hhhh.....",
+  "....hhhhhh....",
+  "....hHHHHh....",
+  ".hhhhhhhhhhhh.",
+  "...rssssssr...",
+  "...rsessesr...",
+  "...rssmmssr...",
+  "...rrssssrr...",
+  "....dCCCCd....",
+  "...dddddddd...",
+  "..dddddddddd..",
+  ".dddddddddddd."
+];
+const PIES_A = ["...bb....bb...", "..bbb....bbb.."];
+const PIES_B = ["....bb..bb....", "...bbb..bbb..."];
+const VUELO_A = CUERPO.map(f => "....".concat(f, "..")).concat([
+  "..yyyyy.bb..bb......",
+  "yyyyyyyBwwwwwwwwwwww",
+  "..yyyyy............."
+]);
+const VUELO_B = CUERPO.map(f => "....".concat(f, "..")).concat([
+  "...yyyy.bb..bb......",
+  "yyyyyyyBwwwwwwwwwwww",
+  "...yyyy............."
+]);
 
-  document.getElementById("retroalimentacion").classList.add("hidden");
-  document.getElementById("continuar").classList.add("hidden");
+function svgPixeles(filas, clase) {
+  const w = filas[0].length, h = filas.length;
+  let r = "";
+  filas.forEach((fila, y) => {
+    let x = 0;
+    while (x < fila.length) {
+      const c = fila[x];
+      if (c === ".") { x++; continue; }
+      let n = 1;
+      while (x + n < fila.length && fila[x + n] === c) n++;
+      r += `<rect x="${x}" y="${y}" width="${n}" height="1" fill="${PAL[c]}"/>`;
+      x += n;
+    }
+  });
+  return `<svg${clase ? ` class="${clase}"` : ""} viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
 
-  const contenido = document.getElementById("contenido");
-  contenido.innerHTML = "";
+/* ================= MUNDO NOCTURNO (canvas pixel art) ================= */
+const MW = 640, MH = 352;
+/* paradas: 0 = campamento, 1..6 = frente a cada obstáculo, 7 = trofeo.
+   El obstáculo k está en el punto medio entre la parada k y la k+1. */
+const PARADAS = [[50,292],[150,266],[122,190],[214,150],[300,206],[390,160],[468,112],[560,70]];
+const R_OBST = 28;
+const FUEGO = [72,300];
+const CASAS = [[26,112],[478,262]];
+const ICONO_DY = [-34,-38,-42,-34,-30,-54];
+const centroObst = k => [(PARADAS[k][0] + PARADAS[k+1][0]) / 2, (PARADAS[k][1] + PARADAS[k+1][1]) / 2];
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function dSeg(px, py, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1];
+  let t = ((px - a[0]) * dx + (py - a[1]) * dy) / (dx * dx + dy * dy);
+  t = Math.max(0, Math.min(1, t));
+  return Math.hypot(px - (a[0] + t * dx), py - (a[1] + t * dy));
+}
+function dCamino(px, py) {
+  let m = 1e9;
+  for (let i = 0; i < PARADAS.length - 1; i++) m = Math.min(m, dSeg(px, py, PARADAS[i], PARADAS[i+1]));
+  return m;
+}
 
-  const texto = document.createElement("div");
-  texto.className = "story-box";
-  texto.textContent = reto.texto;
-  contenido.appendChild(texto);
+const mundoBase = document.createElement("canvas");
+mundoBase.width = MW; mundoBase.height = MH;
 
-  const pregunta = document.createElement("h3");
-  pregunta.textContent = reto.pregunta;
-  contenido.appendChild(pregunta);
+function construirBase() {
+  const c = mundoBase.getContext("2d");
+  const rnd = mulberry32(11);
+  const R = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
+  const elipse = (cx, cy, rx, ry, col) => {
+    for (let dy = -ry; dy < ry; dy += 2) {
+      const hw = Math.round(rx * Math.sqrt(1 - (dy / ry) ** 2));
+      R(cx - hw, cy + dy, hw * 2, 2, col);
+    }
+  };
 
-  reto.opciones.forEach((opcion, i) => {
-    const boton = document.createElement("button");
-    boton.className = "option";
-    boton.textContent = `${String.fromCharCode(65 + i)}. ${opcion}`;
-    boton.onclick = () => responder(i, boton);
-    contenido.appendChild(boton);
+  /* césped de noche */
+  for (let y = 0; y < MH; y += 8) for (let x = 0; x < MW; x += 8) {
+    const v = rnd();
+    R(x, y, 8, 8, v < .5 ? "#17402a" : v < .85 ? "#1a4730" : "#143a26");
+    if (rnd() < .35) R(x + Math.floor(rnd() * 6), y + Math.floor(rnd() * 6), 2, 2, "#27603d");
+    if (rnd() < .05) R(x + 3, y + 3, 2, 2, rnd() < .5 ? "#7a6ac8" : "#c8c86a");
+  }
+
+  /* sendero de tierra */
+  const cam = new Set();
+  for (let y = 0; y < MH; y += 8) for (let x = 0; x < MW; x += 8) if (dCamino(x + 4, y + 4) <= 13) cam.add(x + "," + y);
+  cam.forEach(k => {
+    const [x, y] = k.split(",").map(Number);
+    const v = rnd();
+    R(x, y, 8, 8, v < .5 ? "#5b4c37" : v < .8 ? "#645440" : "#524430");
+    if (rnd() < .4) R(x + Math.floor(rnd() * 6), y + Math.floor(rnd() * 6), 2, 2, "#7a6849");
+    if (!cam.has(x + "," + (y - 8))) R(x, y, 8, 2, "#3d3224");
+    if (!cam.has(x + "," + (y + 8))) R(x, y + 6, 8, 2, "#3d3224");
+    if (!cam.has((x - 8) + "," + y)) R(x, y, 2, 8, "#3d3224");
+    if (!cam.has((x + 8) + "," + y)) R(x + 6, y, 2, 8, "#3d3224");
   });
 
-  const mapaBtn = document.querySelector(
-    '#juego button[onclick="mostrarMapa()"]'
-  );
-  mapaBtn.classList.remove("hidden");
+  /* piezas */
+  const pino = (x, y) => {
+    R(x - 2, y - 5, 4, 5, "#3a2a1e");
+    for (let i = 0; i < 4; i++) {
+      const w = 8 + i * 4, top = y - 27 + i * 5;
+      R(x - w / 2, top, w, 6, "#175a3c");
+      R(x - w / 2, top, 2, 6, "#2f8f6c");
+      R(x - w / 2 + 2, top + 4, w - 2, 2, "#0f3d29");
+    }
+  };
+  const seco = (x, y) => {
+    R(x - 2, y - 16, 4, 16, "#3b2d33"); R(x - 2, y - 16, 1, 16, "#5a4a55");
+    R(x - 8, y - 14, 6, 2, "#3b2d33"); R(x - 8, y - 17, 2, 4, "#3b2d33");
+    R(x + 2, y - 10, 7, 2, "#3b2d33"); R(x + 7, y - 13, 2, 4, "#3b2d33");
+    R(x - 6, y - 8, 4, 2, "#3b2d33");
+  };
+  const arbusto = (x, y) => { R(x - 7, y - 6, 14, 6, "#175230"); R(x - 5, y - 9, 10, 4, "#1d6238"); R(x - 5, y - 9, 3, 3, "#2f8f55"); };
+  const roca = (x, y) => { R(x - 5, y - 4, 10, 4, "#3a3a4c"); R(x - 3, y - 6, 6, 2, "#4d4d63"); };
+  const casa = (x, y, t1, t2) => {
+    R(x, y + 12, 44, 18, "#4a3322");
+    for (let i = 0; i < 44; i += 4) R(x + i, y + 12, 1, 18, "#3a2819");
+    for (let i = 0; i < 6; i++) R(x - 4 + i * 3, y + 12 - (i + 1) * 3, 52 - i * 6, 3, i % 2 ? t1 : t2);
+    R(x + 18, y + 20, 8, 10, "#24150c");
+    [6, 30].forEach(dx => { R(x + dx - 1, y + 16, 10, 9, "#2a1b10"); R(x + dx, y + 17, 8, 7, "#ffd27a"); R(x + dx + 3, y + 17, 2, 7, "#a8742a"); });
+    R(x + 34, y - 6, 5, 10, "#3a2a2a");
+  };
+  const carpa = (x, y) => {
+    for (let r = 0; r < 10; r++) { const w = 4 + r * 3; R(x - w / 2, y - 20 + r * 2, w, 2, r % 2 ? "#6b3a7d" : "#7d4690"); }
+    R(x - 4, y - 8, 8, 8, "#1b0f26");
+  };
+  const gema = (x, y) => { R(x - 5, y - 1, 10, 4, "#3d3d5c"); R(x - 5, y - 1, 10, 1, "#58588a"); };
+
+  /* árboles repartidos fuera del sendero y de los obstáculos */
+  const centros = [1, 2, 3, 4, 5, 6].map(centroObst);
+  const libre = (x, y) =>
+    x > 8 && x < MW - 8 && y > 36 && y < MH - 4 && dCamino(x, y) > 24 &&
+    !centros.some(m => Math.hypot(x - m[0], y - m[1]) < 48) &&
+    Math.hypot(x - FUEGO[0], y - FUEGO[1]) > 28 &&
+    Math.hypot(x - PARADAS[0][0], y - PARADAS[0][1]) > 34 &&
+    Math.hypot(x - PARADAS[7][0], y - PARADAS[7][1]) > 42 &&
+    !CASAS.some(h => x > h[0] - 12 && x < h[0] + 56 && y > h[1] - 8 && y < h[1] + 46);
+  const arboles = [];
+  for (let i = 0; i < 1200 && arboles.length < 72; i++) {
+    const x = Math.round(8 + rnd() * (MW - 16)), y = Math.round(36 + rnd() * (MH - 40));
+    if (!libre(x, y) || arboles.some(a => Math.hypot(a[0] - x, a[1] - y) < 18)) continue;
+    const t = rnd();
+    arboles.push([x, y, t < .18 ? 1 : t < .3 ? 2 : t < .36 ? 3 : 0]);
+  }
+  arboles.sort((a, b) => a[1] - b[1]).forEach(([x, y, t]) => (t === 1 ? seco : t === 2 ? arbusto : t === 3 ? roca : pino)(x, y));
+
+  /* casitas con ventanas encendidas */
+  CASAS.forEach(h => casa(h[0], h[1], "#6b2a2a", "#7a3232"));
+
+  /* campamento */
+  carpa(PARADAS[0][0] - 22, PARADAS[0][1] - 6);
+  R(FUEGO[0] - 8, FUEGO[1], 16, 3, "#4a4a58"); R(FUEGO[0] - 5, FUEGO[1] - 3, 10, 3, "#4a2f1a");
+
+  /* piedras-runa de cada parada */
+  for (let k = 1; k <= 6; k++) gema(PARADAS[k][0], PARADAS[k][1]);
+
+  /* obstáculos */
+  let [mx, my] = centroObst(1);            // 1 · estación abandonada
+  elipse(mx, my, 24, 16, "#262633");
+  for (let i = 0; i < 6; i++) R(mx - 22 + i * 8, my - 8, 3, 16, "#4a3624");
+  R(mx - 24, my - 5, 48, 2, "#8e8ea8"); R(mx - 24, my + 3, 48, 2, "#8e8ea8");
+  R(mx - 14, my - 16, 28, 12, "#5d2a2f"); R(mx - 14, my - 16, 28, 2, "#7d3a40");
+  R(mx - 11, my - 5, 5, 4, "#1a1a22"); R(mx + 6, my - 5, 5, 4, "#1a1a22");
+  R(mx - 8, my - 13, 5, 4, "#ffd27a"); R(mx + 2, my - 13, 5, 4, "#ffd27a");
+  R(mx + 20, my - 24, 2, 20, "#4a4a58"); R(mx + 17, my - 28, 8, 5, "#ffd27a");
+
+  [mx, my] = centroObst(2);                // 2 · casa embrujada
+  elipse(mx, my + 16, 30, 10, "#101a2a");
+  casa(mx - 22, my - 14, "#4a2a5e", "#5a3470");
+  R(mx + 26, my + 8, 6, 9, "#55556b"); R(mx + 25, my + 8, 8, 2, "#6a6a82");
+  R(mx - 32, my + 10, 6, 9, "#55556b"); R(mx - 33, my + 10, 8, 2, "#6a6a82");
+
+  [mx, my] = centroObst(3);                // 3 · bosque espeso
+  elipse(mx, my + 14, 28, 14, "#0c2016");
+  [[-16, 6], [-6, -2], [8, -4], [18, 8], [-12, 18], [2, 16], [14, 20]].sort((a, b) => a[1] - b[1]).forEach(([dx, dy]) => pino(mx + dx, my + dy));
+
+  [mx, my] = centroObst(4);                // 4 · cueva
+  for (let dy = -18; dy < 16; dy += 2) {
+    const hw = Math.round(26 * Math.sqrt(1 - (dy / 20) ** 2));
+    R(mx - hw, my + dy, hw * 2, 2, dy < -8 ? "#5b5b7a" : dy < 2 ? "#47476a" : "#33334a");
+  }
+  R(mx - 9, my + 2, 18, 14, "#05050c"); R(mx - 7, my - 2, 14, 4, "#05050c"); R(mx - 5, my - 4, 10, 2, "#05050c");
+  R(mx + 15, my + 4, 3, 7, "#4fd8ff"); R(mx + 19, my + 7, 3, 5, "#7fe6ff"); R(mx - 20, my + 6, 3, 6, "#4fd8ff");
+
+  [mx, my] = centroObst(5);                // 5 · puente roto sobre un río
+  elipse(mx, my, 32, 18, "#17356b"); elipse(mx, my, 25, 13, "#1e4585");
+  R(mx - 32, my - 5, 24, 10, "#6b4a2b"); R(mx + 8, my - 5, 24, 10, "#6b4a2b");
+  for (let i = 0; i < 4; i++) { R(mx - 30 + i * 6, my - 5, 1, 10, "#3d2a18"); R(mx + 10 + i * 6, my - 5, 1, 10, "#3d2a18"); }
+  R(mx - 32, my - 9, 3, 5, "#3d2a18"); R(mx + 29, my - 9, 3, 5, "#3d2a18"); R(mx - 10, my - 8, 2, 5, "#3d2a18");
+
+  [mx, my] = centroObst(6);                // 6 · torre del relato
+  R(mx - 12, my - 32, 24, 46, "#44445f");
+  for (let i = 0; i < 8; i++) { R(mx - 12, my - 32 + i * 6, 24, 1, "#33334a"); R(mx - 12 + ((i % 2) ? 6 : 12), my - 32 + i * 6, 1, 6, "#33334a"); }
+  for (let i = 0; i < 3; i++) R(mx - 12 + i * 10, my - 38, 6, 6, "#44445f");
+  R(mx - 3, my - 22, 6, 10, "#ffd27a"); R(mx - 4, my + 4, 8, 10, "#16101f");
+  R(mx, my - 52, 1, 14, "#aaa"); R(mx + 1, my - 52, 8, 5, "#ff4d6d");
+
+  const [tx, ty] = PARADAS[7];             // meta · trofeo
+  elipse(tx, ty, 20, 12, "#3a3a52"); elipse(tx, ty, 13, 8, "#4a4a68");
+  R(tx - 10, ty - 14, 20, 12, "#22222e"); R(tx - 12, ty - 16, 24, 4, "#33334a"); R(tx - 9, ty - 16, 18, 2, "#5bd75b");
+  R(tx - 10, ty - 2, 3, 4, "#22222e"); R(tx + 7, ty - 2, 3, 4, "#22222e");
 }
 
-function responder(eleccion, boton) {
-  if (bloqueado) return;
-  bloqueado = true;
+/* ---------- La bruja en el mundo ---------- */
+const _runs = new Map();
+function runsDe(filas) {
+  if (_runs.has(filas)) return _runs.get(filas);
+  const r = [];
+  filas.forEach((fila, y) => {
+    let x = 0;
+    while (x < fila.length) {
+      const ch = fila[x];
+      if (ch === ".") { x++; continue; }
+      let n = 1; while (x + n < fila.length && fila[x + n] === ch) n++;
+      r.push([x, y, n, PAL[ch]]); x += n;
+    }
+  });
+  _runs.set(filas, r);
+  return r;
+}
+function dibujarSprite(c, filas, x0, y0, esc, voltear) {
+  const w = filas[0].length * esc;
+  runsDe(filas).forEach(([x, y, n, col]) => {
+    c.fillStyle = col;
+    const px = voltear ? x0 + w - (x + n) * esc : x0 + x * esc;
+    c.fillRect(Math.round(px), Math.round(y0 + y * esc), n * esc, esc);
+  });
+}
 
-  const reto = retos[indice];
-  const correcta = eleccion === reto.correcta;
-  const caja = document.getElementById("retroalimentacion");
+const W = { x: PARADAS[0][0], y: PARADAS[0][1], alt: 0, modo: "quieta", voltear: false,
+            cola: [], leg: null, u: 0, len: 1, vel: 50, fin: null, hover: true,
+            tropiezo: 0, salto: 0, chispas: [], tChispa: 0 };
 
-  if (correcta) {
-    puntos += 10;
-    insignias.push(`Insignia ${indice + 1}`);
-    caja.className = "feedback success";
-    caja.textContent = `¡Excelente investigación! ${reto.explicacion} Ganaste 10 puntos.`;
-    boton.classList.add("correct");
+function colocarBruja(k) {
+  W.x = PARADAS[k][0]; W.y = PARADAS[k][1]; W.alt = 0; W.cola = []; W.leg = null; W.modo = "quieta"; W.fin = null;
+}
+function pintarTablero() { if (!W.leg && !W.cola.length) colocarBruja(E.vis); }
+
+function construirTramos(k0, k1, modo) {
+  const L = [];
+  for (let k = k0; k < k1; k++) {
+    const a = PARADAS[k], b = PARADAS[k + 1];
+    if (k === 0) { L.push({ a, b, modo: "camina", tipo: "paso" }); continue; }
+    if (modo === "vuela") { L.push({ a, b, modo: "vuela", tipo: "ruta" }); continue; }
+    const m = centroObst(k), d = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d;
+    const A = [m[0] - ux * R_OBST, m[1] - uy * R_OBST], B = [m[0] + ux * R_OBST, m[1] + uy * R_OBST];
+    L.push({ a, b: A, modo: "camina", tipo: "paso" }, { a: A, b: B, modo: "vuela", tipo: "cruce" }, { a: B, b, modo: "camina", tipo: "paso" });
+  }
+  return L;
+}
+
+/* modo: "camina" = sendero + vuelo sobre cada obstáculo; "vuela" = atajo volando todo el camino */
+function moverBruja(destino, modo, alTerminar) {
+  const Ej = E;
+  const m = $("mundo"), r = m.getBoundingClientRect();
+  if (r.top < 0 || r.bottom > window.innerHeight) m.scrollIntoView({ block: "center", behavior: "smooth" });
+  W.cola = construirTramos(E.vis, destino, modo);
+  W.fin = () => { if (Ej !== E) return; E.vis = destino; if (alTerminar) alTerminar(); };
+  if (!W.cola.length) { const f = W.fin; W.fin = null; f(); }
+}
+
+function actualizarBruja(dt, t) {
+  const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!W.leg && W.cola.length) {
+    const g = W.cola.shift();
+    W.leg = g; W.u = 0; W.len = Math.max(1, Math.hypot(g.b[0] - g.a[0], g.b[1] - g.a[1]));
+    W.vel = (g.modo === "vuela" ? 78 : 46) * (quieto ? 8 : 1);
+    W.modo = g.modo;
+    if (Math.abs(g.b[0] - g.a[0]) > 1) W.voltear = g.b[0] < g.a[0];
+  }
+  if (W.leg) {
+    W.u = Math.min(1, W.u + W.vel * dt / W.len);
+    const g = W.leg, u = W.u;
+    W.x = g.a[0] + (g.b[0] - g.a[0]) * u;
+    W.y = g.a[1] + (g.b[1] - g.a[1]) * u;
+    W.alt = g.tipo === "cruce" ? 24 * Math.sin(Math.PI * u)
+          : g.tipo === "ruta" ? 18 * Math.min(1, u / .12, (1 - u) / .12) + 2 * Math.sin(t * 11)
+          : 0;
+    if (W.alt > 3 && !quieto) {
+      W.tChispa -= dt;
+      if (W.tChispa <= 0) {
+        W.tChispa = .045;
+        W.chispas.push({ x: W.x + (W.voltear ? 12 : -12) + (Math.random() - .5) * 8, y: W.y - W.alt - 4 + Math.random() * 6,
+                         vida: .7, col: Math.random() < .5 ? "#ffd23f" : "#3ef0ff" });
+      }
+    }
+    if (u >= 1) {
+      W.leg = null;
+      if (!W.cola.length) {
+        W.modo = "quieta"; W.alt = 0;
+        const f = W.fin; W.fin = null;
+        if (f) f();
+      }
+    }
   } else {
-    caja.className = "feedback error";
-    caja.textContent =
-      `Esa no es la pista adecuada. ${reto.explicacion} Puedes volver a intentarlo en otra partida.`;
-    boton.classList.add("incorrect");
-    document.querySelectorAll(".option")[reto.correcta]
-      .classList.add("correct");
+    W.alt = W.hover ? 12 + 3 * Math.sin(t * 3) : 0;
+    if (W.salto > 0) { W.salto -= dt; W.alt = Math.abs(Math.sin(t * 9)) * 12; }
+  }
+  if (W.tropiezo > 0) W.tropiezo -= dt;
+  if (W.botin) { W.botin.t += dt; if (W.botin.t > 1.8) W.botin = null; }
+  W.chispas.forEach(p => { p.vida -= dt; p.x -= 14 * dt * (W.voltear ? -1 : 1); p.y += 10 * dt; });
+  W.chispas = W.chispas.filter(p => p.vida > 0);
+}
+function tropezarBruja() { W.tropiezo = .7; }
+
+/* ---------- Dibujo de cada cuadro ---------- */
+const mundoCanvas = $("mundoCanvas");
+const mctx = mundoCanvas.getContext("2d");
+const noche = document.createElement("canvas");
+noche.width = MW; noche.height = MH;
+const nctx = noche.getContext("2d");
+let enInicio = true;
+
+function luz(x, y, r, a) {
+  [[1, .18], [.75, .2], [.5, .25], [.28, .3]].forEach(([f, al]) => {
+    nctx.fillStyle = `rgba(0,0,0,${al * (a === undefined ? 1 : a)})`;
+    nctx.beginPath(); nctx.arc(x, y, r * f, 0, 6.2832); nctx.fill();
+  });
+}
+
+function dibujarMundo(ts) {
+  const c = mctx, t = ts / 1000;
+  const R = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
+  const vis = E ? E.vis : 0;
+  c.imageSmoothingEnabled = false;
+  c.globalCompositeOperation = "source-over";
+  c.drawImage(mundoBase, 0, 0);
+
+  /* río del puente */
+  const [bx, by] = centroObst(5);
+  for (let i = 0; i < 10; i++) {
+    const s = Math.floor(t * 2);
+    const x = bx - 28 + ((i * 53 + s * 17) % 56), y = by - 14 + ((i * 29 + s * 11) % 28);
+    if (((x - bx) / 30) ** 2 + ((y - by) / 17) ** 2 < .8) R(x, y, 3, 1, "#a8d4ff");
+  }
+  /* hoguera */
+  const h = 6 + Math.round(Math.sin(t * 18) * 2 + Math.sin(t * 11));
+  R(FUEGO[0] - 4, FUEGO[1] - 3 - h, 8, h, "#ff7a1a");
+  R(FUEGO[0] - 2, FUEGO[1] - 3 - h - 3, 4, h, "#ffb52e");
+  R(FUEGO[0] - 1, FUEGO[1] - 3 - h - 5, 2, 3, "#fff0a0");
+  /* burbujas del caldero */
+  for (let j = 0; j < 3; j++) { const p = (t * .8 + j / 3) % 1; R(PARADAS[7][0] - 6 + j * 6 + Math.round(Math.sin(t * 3 + j) * 2), PARADAS[7][1] - 18 - Math.round(p * 14), 3, 3, `rgba(120,255,140,${1 - p})`); }
+  /* gemas de las paradas */
+  for (let k = 1; k <= 6; k++) {
+    const col = k < vis ? "#5bd75b" : k === vis ? (Math.floor(t * 3) % 2 ? "#ffd23f" : "#ff9f1a") : "#3a6fff";
+    R(PARADAS[k][0] - 2, PARADAS[k][1] - 6, 4, 4, col);
+  }
+  /* etiquetas de obstáculos */
+  c.textAlign = "center"; c.textBaseline = "middle";
+  for (let k = 1; k <= 6; k++) {
+    const [mx, my] = centroObst(k);
+    const iy = my + ICONO_DY[k - 1] + Math.round(Math.sin(t * 2 + k) * 2);
+    const hecho = k < vis, actual = k === vis;
+    R(mx - 11, iy - 10, 22, 20, hecho ? "#5bd75b" : actual ? "#ffd23f" : "#6f8cff");
+    R(mx - 9, iy - 8, 18, 16, "rgba(5,8,30,.92)");
+    if (hecho) { c.font = '8px Silkscreen, monospace'; c.fillStyle = "#5bd75b"; c.fillText("OK", mx, iy + 1); }
+    else dibujarIcono(c, obstaculos[k - 1].icono, mx, iy, 1);
+    if (actual) { const b = Math.floor(t * 4) % 2 * 2; R(mx - 3, iy - 18 + b, 6, 2, "#ffd23f"); R(mx - 2, iy - 16 + b, 4, 2, "#ffd23f"); R(mx - 1, iy - 14 + b, 2, 2, "#ffd23f"); }
+  }
+  /* luciérnagas */
+  for (let i = 0; i < 16; i++) {
+    const x = ((i * 97) % MW) + Math.sin(t * .7 + i) * 18, y = 50 + ((i * 53) % 270) + Math.cos(t * .5 + i * 1.3) * 12;
+    c.fillStyle = `rgba(200,255,120,${.35 + .65 * Math.max(0, Math.sin(t * 3 + i * 2))})`;
+    c.fillRect(Math.round(x), Math.round(y), 2, 2);
   }
 
-  respondidas[indice] = correcta;
-  document.getElementById("puntos").textContent = puntos;
-  document.getElementById("cantidad").textContent = insignias.length;
-  document.getElementById("barra").style.width =
-    `${((indice + 1) / retos.length) * 100}%`;
+  /* la bruja */
+  const sh = Math.max(6, 22 - W.alt * .5);
+  R(W.x - sh / 2, W.y - 2, sh, 4, "rgba(0,0,0,.45)");
+  const frame = Math.floor(t * 5.5) % 2;
+  const vuela = W.alt > 2 || W.modo === "vuela" || W.hover;
+  const filas = vuela ? (frame ? VUELO_B : VUELO_A)
+                      : CUERPO.concat(W.leg && frame ? PIES_B : PIES_A);
+  const esc = 2, ancho = filas[0].length * esc, alto = filas.length * esc;
+  const sacudida = W.tropiezo > 0 ? Math.sin(t * 60) * 2 : 0;
+  const rebote = !vuela && W.leg ? (frame ? -1 : 0) : 0;
+  dibujarSprite(c, filas, Math.round(W.x - ancho / 2 + sacudida), Math.round(W.y - alto - W.alt + rebote), esc, W.voltear);
+  if (W.tropiezo > 0) { c.font = "16px Silkscreen, monospace"; c.fillStyle = "#ff4d6d"; c.fillText("!", W.x, W.y - alto - W.alt - 6); }
+  W.chispas.forEach(p => { c.globalAlpha = Math.min(1, p.vida * 2); c.fillStyle = p.col; c.fillRect(Math.round(p.x), Math.round(p.y), 2, 2); });
+  c.globalAlpha = 1;
 
-  caja.classList.remove("hidden");
-  document.getElementById("continuar").classList.remove("hidden");
+  /* ingrediente reclamado */
+  if (W.botin) {
+    const b = W.botin, by = W.y - alto - W.alt - 14 - b.t * 18;
+    c.globalAlpha = Math.min(1, (1.8 - b.t) * 2); dibujarIcono(c, b.i, W.x, by, 3); c.globalAlpha = 1;
+    for (let j = 0; j < 6; j++) { const a = b.t * 6 + j * 1.05; R(W.x + Math.cos(a) * 18, by + Math.sin(a) * 14, 2, 2, j % 2 ? "#ffd23f" : "#3ef0ff"); }
+  }
+  /* noche: oscuridad + luces */
+  nctx.globalCompositeOperation = "source-over";
+  nctx.clearRect(0, 0, MW, MH);
+  nctx.fillStyle = "rgba(6,10,44,.5)";
+  nctx.fillRect(0, 0, MW, MH);
+  nctx.globalCompositeOperation = "destination-out";
+  luz(430, 150, 230, .35);                                              // luz de luna
+  luz(W.x, W.y - 14 - W.alt, 88 + Math.sin(t * 5) * 2, 1);              // farol de la bruja
+  luz(FUEGO[0], FUEGO[1] - 6, 64 + Math.sin(t * 17) * 4, .95);
+  CASAS.forEach(hh => { luz(hh[0] + 10, hh[1] + 20, 28, .9); luz(hh[0] + 34, hh[1] + 20, 28, .9); });
+  { const [mx, my] = centroObst(1); luz(mx + 21, my - 26, 36, .9); }
+  { const [mx, my] = centroObst(2); luz(mx - 12, my + 6, 28, .9); luz(mx + 12, my + 6, 28, .9); }
+  { const [mx, my] = centroObst(4); luz(mx + 17, my + 6, 36, .85); }
+  { const [mx, my] = centroObst(6); luz(mx, my - 17, 44, .9); }
+  luz(PARADAS[7][0], PARADAS[7][1] - 10, 58 + Math.sin(t * 3) * 3, .95);
+  if (vis < 7) luz(PARADAS[vis][0], PARADAS[vis][1], 30, .6);
+  c.drawImage(noche, 0, 0);
 
-  document.getElementById("continuar").textContent =
-    indice === retos.length - 1 ? "Ver resultados" : "Siguiente misión";
-}
-
-function pista() {
-  const caja = document.getElementById("retroalimentacion");
-  caja.className = "feedback";
-  caja.textContent = `Pista del detective: ${retos[indice].pista}`;
-  caja.classList.remove("hidden");
-}
-
-function siguiente() {
-  if (indice < retos.length - 1) {
-    indice++;
-    dibujarReto();
-  } else {
-    terminar();
+  /* portada */
+  if (enInicio) {
+    c.fillStyle = "rgba(4,6,28,.84)"; c.fillRect(150, 26, 340, 98);
+    c.strokeStyle = "#ffd23f"; c.lineWidth = 4; c.strokeRect(152, 28, 336, 94);
+    c.textAlign = "center"; c.textBaseline = "alphabetic";
+    c.font = "32px Silkscreen, monospace"; c.fillStyle = "#ffd23f"; c.fillText("DETECTIVES", 320, 68);
+    c.font = "24px Silkscreen, monospace"; c.fillStyle = "#fff"; c.fillText("DEL LENGUAJE", 320, 96);
+    c.font = "8px Silkscreen, monospace"; c.fillStyle = "#3ef0ff"; c.fillText("OPERACIÓN ESCENARIO · MUNDO DE NOCHE", 320, 114);
   }
 }
 
-function mostrarMapa() {
-  ocultarTodo();
-  document.getElementById("mapa").classList.remove("hidden");
+let _ult = 0;
+function bucleMundo(ts) {
+  const dt = Math.min(.05, (ts - _ult) / 1000 || 0); _ult = ts;
+  actualizarBruja(dt, ts / 1000);
+  dibujarMundo(ts);
+  requestAnimationFrame(bucleMundo);
+}
+function iniciarMundo() {
+  iconosEstaticos();
+  $("lupa").innerHTML = svgPixeles(CUERPO.concat(PIES_A));
+  construirBase();
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load("32px Silkscreen"); document.fonts.load("8px Silkscreen");
+  }
+  requestAnimationFrame(bucleMundo);
+}
 
-  const contenedor = document.getElementById("misiones");
-  contenedor.innerHTML = "";
+function pintarPips() {
+  let h = '<div class="pips" aria-label="Progreso de preguntas">';
+  for (let i = 0; i < NP; i++) {
+    const estado = E.pips[i] === true ? "ok" : E.pips[i] === false ? "fallo" : i === E.q ? "actual" : "";
+    h += `<div class="pip ${estado}"></div>`;
+  }
+  return h + "</div>";
+}
 
-  retos.forEach((reto, i) => {
-    const boton = document.createElement("button");
-    boton.className = "mission";
-    if (respondidas[i] === true) boton.classList.add("done");
+function limpiarMensaje() {
+  $("retroalimentacion").classList.add("oculto");
+  $("acciones").innerHTML = "";
+}
 
-    boton.innerHTML =
-      `<strong>Misión ${i + 1}</strong>${reto.titulo}<br>` +
-      `${respondidas[i] === true ? "✓ Completada" :
-        i <= indice ? "Disponible" : "Por descubrir"}`;
+function mensaje(texto, tipo) {
+  const f = $("retroalimentacion");
+  f.className = "feedback " + (tipo || "");
+  f.textContent = texto;
+}
 
-    boton.onclick = () => {
-      indice = i;
-      ocultarTodo();
-      document.getElementById("juego").classList.remove("hidden");
-      dibujarReto();
+function encabezado(ob) {
+  return `<p class="nivel">${ob.tema}</p>` +
+    `<div class="escena-titulo"><span class="grande">${ico(ob.icono, 3)}</span>` +
+    `<h2>Obstáculo ${E.o + 1} de ${obstaculos.length}: ${ob.titulo}</h2></div>`;
+}
+
+function mostrarObstaculo() {
+  const ob = obstaculos[E.o];
+  E.ruta = null; E.bloq = false;
+  pintarRecursos(); pintarTablero(); limpiarMensaje();
+  if (E.vis < E.pos) {
+    const Ej = E;
+    setTimeout(() => { if (Ej === E && E.vis < E.pos) moverBruja(E.pos, "camina"); }, 500);
+  }
+  $("escena").innerHTML =
+    encabezado(ob) +
+    `<div class="nota">Responde ${NP} preguntas y acierta al menos ${MINIMO} para cruzar. ` +
+    `Si no lo logras, pierdes una vida y repites el obstáculo.</div>` +
+    `<h3>Elige tu ruta</h3>` +
+    `<div class="rutas">` +
+    `<button class="ruta seguro" onclick="elegirRuta('seguro')"><strong>${ico("hoja", 2)} Camino seguro</strong>La bruja camina por el sendero y vuela sobre el obstáculo. +10 puntos por acierto. Los errores no cuestan vidas.</button>` +
+    `<button class="ruta riesgo" onclick="elegirRuta('riesgo')"><strong>${ico("fuego", 2)} Atajo arriesgado</strong>La bruja vuela directo en su escoba. +25 puntos por acierto. Cada error cuesta una vida.</button>` +
+    `</div>`;
+}
+
+function elegirRuta(tipo) {
+  E.ruta = tipo;
+  E.q = 0; E.aciertosObs = 0; E.ptsObs = 0; E.pips = [];
+  E.ordenQ = mezclar(NP);
+  mostrarPregunta();
+}
+
+function mostrarPregunta() {
+  const ob = obstaculos[E.o];
+  const r = ob.preguntas[E.ordenQ[E.q]];
+  E.bloq = false;
+  E.orden = mezclar(4);
+  E.quitadas = [];
+  E.usoPista = false;
+  E.uso5050 = false;
+  pintarRecursos(); limpiarMensaje();
+  $("escena").innerHTML =
+    encabezado(ob) + pintarPips() +
+    `<p>${E.ruta === "riesgo" ? ico("fuego", 2) + " Atajo arriesgado" : ico("hoja", 2) + " Camino seguro"} · Pregunta ${E.q + 1} de ${NP}</p>` +
+    `<div class="nota">${r.t}</div>` +
+    `<h3>${r.p}</h3><div id="opciones"></div>` +
+    `<div><button class="suave" id="bPista" onclick="usarPista()">${ico("linterna", 2)} Linterna (${E.pistas})</button>` +
+    `<button class="suave" id="bTijera" onclick="usarTijeras()">${ico("tijeras", 2)} Tijeras (${E.comodines})</button></div>`;
+
+  if (window.innerWidth <= 900) $("escena").scrollIntoView({ block: "start", behavior: "smooth" });
+  const cont = $("opciones");
+  E.orden.forEach((k, pos) => {
+    const b = document.createElement("button");
+    b.className = "option";
+    b.dataset.k = k;
+    b.textContent = `${String.fromCharCode(65 + pos)}. ${r.o[k]}`;
+    b.onclick = () => responder(k);
+    cont.appendChild(b);
+  });
+}
+
+function preguntaActual() {
+  return obstaculos[E.o].preguntas[E.ordenQ[E.q]];
+}
+
+function usarPista() {
+  if (E.bloq) return;
+  if (!E.usoPista) {
+    if (E.pistas <= 0) { mensaje("Ya no te quedan linternas. ¡Usa tu ingenio!", "error"); return; }
+    E.pistas--; E.usoPista = true;
+    pintarRecursos();
+    $("bPista").innerHTML = ico("linterna", 2) + " Usada";
+  }
+  mensaje("Pista del detective: " + preguntaActual().h);
+}
+
+function usarTijeras() {
+  if (E.bloq || E.uso5050) return;
+  if (E.comodines <= 0) { mensaje("Ya no te quedan tijeras.", "error"); return; }
+  const r = preguntaActual();
+  const malas = E.orden.filter(k => k !== r.c);
+  mezclar(malas.length).slice(0, 2).forEach(i => E.quitadas.push(malas[i]));
+  E.comodines--; E.uso5050 = true;
+  document.querySelectorAll(".option").forEach(b => {
+    if (E.quitadas.includes(+b.dataset.k)) { b.disabled = true; b.classList.add("tachada"); }
+  });
+  pintarRecursos();
+  $("bTijera").disabled = true;
+}
+
+function responder(k) {
+  if (E.bloq) return;
+  E.bloq = true;
+  const r = preguntaActual();
+  const ok = k === r.c;
+  const riesgo = E.ruta === "riesgo";
+  const botones = [...document.querySelectorAll(".option")];
+  const elegido = botones.find(b => +b.dataset.k === k);
+  botones.forEach(b => b.disabled = true);
+  $("bPista").disabled = true; $("bTijera").disabled = true;
+  const acc = $("acciones");
+  const ultima = E.q === NP - 1;
+  const sig = ico("flecha", 2) + (ultima ? " Ver resultado del obstáculo" : " Siguiente pregunta");
+
+  E.pips[E.q] = ok;
+  if (ok) melodia([660, 880]); else pitido(160, .25, "sawtooth");
+  if (ok) {
+    elegido.classList.add("correct");
+    E.racha++; E.aciertosObs++;
+    const base = riesgo ? 25 : 10;
+    const bono = E.racha >= 3 ? 5 : 0;
+    E.puntos += base + bono; E.ptsObs += base + bono;
+    mensaje(`¡Correcto! ${r.e} +${base} puntos` + (bono ? " y +5 de racha." : "."), "success");
+    acc.innerHTML = `<button onclick="siguientePregunta()">${sig}</button>`;
+  } else {
+    elegido.classList.add("incorrect");
+    botones.find(b => +b.dataset.k === r.c).classList.add("correct");
+    E.racha = 0;
+    if (riesgo) {
+      E.vidas--;
+      if (E.vidas <= 0) {
+        mensaje(`Fallaste en el atajo y perdiste tu última vida. ${r.e}`, "error");
+        acc.innerHTML = `<button onclick="perder()">Ver resultado</button>`;
+      } else {
+        mensaje(`Fallaste y perdiste una vida. ${r.e}`, "error");
+        acc.innerHTML = `<button onclick="siguientePregunta()">${sig}</button>`;
+      }
+    } else {
+      mensaje(`Fallaste, pero no perdiste vidas. ${r.e}`, "error");
+      acc.innerHTML = `<button onclick="siguientePregunta()">${sig}</button>`;
+    }
+  }
+  pintarRecursos();
+  $("escena").querySelector(".pips").outerHTML = pintarPips();
+  if (window.innerWidth <= 900) setTimeout(() => $("acciones").scrollIntoView({ block: "nearest", behavior: "smooth" }), 80);
+}
+
+function siguientePregunta() {
+  E.q++;
+  if (E.q >= NP) cerrarObstaculo();
+  else mostrarPregunta();
+}
+
+function cerrarObstaculo() {
+  const ob = obstaculos[E.o];
+  const ultimo = E.o === obstaculos.length - 1;
+  limpiarMensaje();
+  $("escena").innerHTML = encabezado(ob) + pintarPips();
+  if (E.aciertosObs >= MINIMO) {
+    E.pos++;
+    E.pistas++;
+    E.aciertosTot += E.aciertosObs;
+    E.ins.push(ob);
+    pintarRecursos();
+    const modo = E.ruta === "riesgo" ? "vuela" : "camina";
+    mensaje(`¡Obstáculo superado! Acertaste ${E.aciertosObs} de ${NP}. Ganaste una linterna. Cuando la bruja llegue, reclama tu ingrediente mágico. ` +
+      (modo === "vuela" ? "¡La bruja vuela directo en su escoba!" : "La bruja cruza el obstáculo volando y sigue a pie."), "success");
+    $("acciones").innerHTML =
+      `<button id="bSig" disabled onclick="reclamar()">${ico(ob.ing.i, 2)} Reclamar: ${ob.ing.n}</button>`;
+    moverBruja(E.pos, modo, () => {
+      const s = $("bSig"); if (s) s.disabled = false;
+      if (ultimo) W.salto = 1.6;
+    });
+  } else {
+    E.vidas--;
+    E.puntos -= E.ptsObs;
+    E.racha = 0;
+    pintarRecursos();
+    tropezarBruja();
+    if (E.vidas <= 0) {
+      mensaje(`Acertaste ${E.aciertosObs} de ${NP} y necesitabas ${MINIMO}. Se acabaron tus vidas.`, "error");
+      $("acciones").innerHTML = `<button onclick="perder()">Ver resultado</button>`;
+    } else {
+      mensaje(`Acertaste ${E.aciertosObs} de ${NP} y necesitabas ${MINIMO}. Pierdes una vida y los puntos de este intento. Repite el obstáculo.`, "error");
+      $("acciones").innerHTML = `<button onclick="mostrarObstaculo()">${ico("volver", 2)} Repetir obstáculo</button>`;
+    }
+  }
+}
+
+function reclamar() {
+  const ob = obstaculos[E.o], g = ob.ing, ultimo = E.o === obstaculos.length - 1;
+  E.ing.push(E.o); W.botin = { i: g.i, t: 0 };
+  melodia([523, 659, 784, 1047]);
+  pintarRecursos();
+  mensaje(`La bruja levanta la varita: ¡Reclamo ${g.n}! Este ingrediente ${g.d}. Llevas ${E.ing.length} de ${obstaculos.length}.`, "success");
+  $("acciones").innerHTML = ultimo
+    ? `<button onclick="ganar()">${ico("caldero", 2)} Ir al caldero mágico</button>`
+    : `<button onclick="avanzar()">${ico("flecha", 2)} Siguiente obstáculo</button>`;
+}
+
+function avanzar() {
+  E.o++;
+  mostrarObstaculo();
+}
+
+function perder() {
+  mostrar("derrota");
+  $("resumenDerrota").textContent =
+    `${E.nombre}, llegaste al obstáculo ${E.o + 1} de ${obstaculos.length} y reuniste ${E.puntos} puntos.`;
+}
+
+function ganar() {
+  mostrar("victoria"); prepararFinal();
+  const total = obstaculos.length * NP;
+  $("resumen").textContent =
+    `${E.nombre}, completaste la expedición con ${E.puntos} puntos y ${E.aciertosTot} aciertos de ${total} preguntas. ` +
+    `Te sobraron ${E.vidas} ${E.vidas === 1 ? "vida" : "vidas"}.`;
+  const oro = null, plata = { Y: "#c9c9e0", y: "#f4f4ff", O: "#8a8aa8" },
+        bronce = { Y: "#d58a4a", y: "#f0b27a", O: "#8a4a1f" }, verde = { Y: "#5bd75b", y: "#a8f0a8", O: "#2f8f55" };
+  const [txt, pal] = E.aciertosTot >= 44 ? ["Detective Maestro", oro] :
+                     E.aciertosTot >= 36 ? ["Detective Experto", plata] :
+                     E.aciertosTot >= 28 ? ["Detective Aprendiz", bronce] : ["Detective Novato", verde];
+  $("rango").innerHTML = ico("medalla", 3, pal) + " Rango: " + txt;
+  $("insigniasFinales").innerHTML = E.ins.map(o => `<span class="insignia">${ico("medalla", 2)}${ico(o.icono, 2)} ${o.titulo}</span>`).join("");
+}
+
+function prepararFinal() {
+  SEL.clear();
+  $("pasoPocion").classList.remove("oculto"); $("resultado").classList.add("oculto");
+  $("mensajeFinal").textContent = ""; $("nomPocion").value = ""; $("creacion").value = "";
+  $("ingredientesFinal").innerHTML = obstaculos.map(o => `<span class="insignia">${ico(o.ing.i, 2)} ${o.ing.n}</span>`).join("");
+  const cont = $("dulces"); cont.innerHTML = "";
+  DULCES.forEach((d, k) => {
+    const b = document.createElement("button");
+    b.className = "dulce"; b.setAttribute("aria-pressed", "false");
+    b.innerHTML = ico(d.i, 2) + " " + d.n;
+    b.onclick = () => {
+      if (SEL.has(k)) SEL.delete(k);
+      else if (SEL.size < 3) SEL.add(k);
+      else { $("mensajeFinal").textContent = "Solo caben 3 dulces en el caldero."; return; }
+      b.classList.toggle("sel", SEL.has(k)); b.setAttribute("aria-pressed", SEL.has(k)); pitido(700, .08);
     };
-
-    contenedor.appendChild(boton);
+    cont.appendChild(b);
   });
 }
 
-function volverJuego() {
-  ocultarTodo();
-  document.getElementById("juego").classList.remove("hidden");
+function prepararPocion() {
+  const m = $("mensajeFinal"), Ej = E;
+  const nom = $("nomPocion").value.trim() || "Poción de la dulce amistad", txt = $("creacion").value.trim();
+  if (SEL.size < 3) { m.textContent = "Elige 3 dulces para la poción."; return; }
+  if (txt.length < 30) { m.textContent = "Describe mejor el lugar de la fiesta: dónde es, cómo es el ambiente y qué se percibe."; return; }
+  const dul = [...SEL].map(k => DULCES[k]);
+  $("pasoPocion").classList.add("oculto"); $("resultado").classList.remove("oculto");
+  $("tarjeta").classList.add("oculto"); $("acRes").classList.add("oculto"); $("mensajeCopia").textContent = "";
+  $("caldero").innerHTML = ico("caldero", 8) + '<div class="burbujas"><i></i><i></i><i></i></div>';
+  const items = obstaculos.map(o => o.ing).concat(dul);
+  items.forEach((it, j) => setTimeout(() => { if (Ej === E) { $("cargaPocion").textContent = "La bruja añade: " + it.n + "..."; pitido(400 + j * 70, .12); } }, j * 450));
+  setTimeout(() => {
+    if (Ej !== E) return;
+    RECETA = `${nom}\nIngredientes mágicos: ${obstaculos.map(o => o.ing.n).join(", ")}.\nDulces: ${dul.map(d => d.n).join(", ")}.\nLugar de la fiesta: ${txt}\nPreparada por ${E.nombre} y la bruja detective.`;
+    const t = $("tarjeta");
+    t.innerHTML = `<h3>${ico("pocion", 3)} <span id="tNom"></span></h3>` +
+      `<p><strong>Ingredientes mágicos:</strong> ${obstaculos.map(o => ico(o.ing.i, 2)).join(" ")}</p>` +
+      `<p><strong>Dulces para compartir:</strong> ${dul.map(d => ico(d.i, 2) + " " + d.n).join(" · ")}</p>` +
+      `<p><strong>Lugar de la fiesta:</strong> <span id="tTxt"></span></p>` +
+      `<p><strong>Hechizo:</strong> ¡Dulces para todos, risas para siempre! Sexto grado, ¡a compartir!</p>` +
+      `<p><strong>Preparada por:</strong> <span id="tAut"></span> y la bruja detective</p>`;
+    $("tNom").textContent = nom; $("tTxt").textContent = txt; $("tAut").textContent = E.nombre;
+    $("cargaPocion").textContent = "¡La poción está lista!";
+    t.classList.remove("oculto"); $("acRes").classList.remove("oculto");
+    melodia([392, 523, 659, 784, 1047]);
+  }, items.length * 450 + 300);
 }
 
-function terminar() {
-  ocultarTodo();
-  document.getElementById("final").classList.remove("hidden");
-
-  const aciertos = respondidas.filter(Boolean).length;
-  document.getElementById("resumen").textContent =
-    `${jugador}, terminaste la investigación con ${puntos} puntos y ` +
-    `${aciertos} misiones acertadas de ${retos.length}.`;
-
-  document.getElementById("insigniasFinales").innerHTML =
-    insignias.map((insignia, i) =>
-      `<span class="badge">🏅 ${insignia}</span>`
-    ).join("");
+function copiarReceta() {
+  try { navigator.clipboard.writeText(RECETA); } catch (e) {}
+  $("mensajeCopia").textContent = "¡Receta copiada! Pégala en tu cuaderno o compártela con tu grupo.";
 }
 
-function guardarCreacion() {
-  const texto = document.getElementById("creacion").value.trim();
-  const mensaje = document.getElementById("mensajeFinal");
-
-  if (texto.length < 20) {
-    mensaje.textContent =
-      "Agrega más detalles para que el escenario pueda imaginarse con claridad.";
-    return;
-  }
-
-  mensaje.textContent =
-    "¡Creación registrada en tu expediente! Recuerda copiarla si deseas conservarla.";
-}
-
-function reiniciar() {
-  ocultarTodo();
-  document.getElementById("inicio").classList.remove("hidden");
-}
+iniciarMundo();
 </script>
 </body>
 </html>
