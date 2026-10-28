@@ -54,7 +54,7 @@ h2 { margin: 0 0 12px; font-size: clamp(.8rem, 2.4vw, 1.15rem); line-height: 1.6
 h3 { margin: 18px 0 10px; font-size: 1em; line-height: 1.7; color: var(--cian); }
 p { margin: 8px 0; }
 .oculto { display: none !important; }
-
+ 
 button {
   font: inherit;
   line-height: 1.7;
@@ -72,7 +72,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 4px dashed var(--cian); outline-offset: 3px; }
 .suave { background: var(--panel2); color: var(--blanco); }
 .suave:hover:not(:disabled) { background: #4340a8; }
-
+ 
 input, textarea {
   width: 100%;
   font: inherit;
@@ -83,7 +83,7 @@ input, textarea {
   margin: 10px 0;
 }
 label { display: block; margin-top: 14px; }
-
+ 
 .nota {
   background: #000;
   border: 4px solid var(--blanco);
@@ -92,49 +92,49 @@ label { display: block; margin-top: 14px; }
   line-height: 2;
 }
 .reglas { padding-left: 18px; line-height: 2.1; }
-
+ 
 .recursos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .dato { background: #000; border: 3px solid var(--cian); padding: 4px 10px; }
-
+ 
 /* Barra de 8 preguntas */
 .pips { display: flex; gap: 6px; margin: 12px 0 16px; }
 .pip { flex: 1; height: 16px; background: #000; border: 3px solid #5b58c4; }
 .pip.ok { background: var(--verde); border-color: #000; }
 .pip.fallo { background: var(--rojo); border-color: #000; }
 .pip.actual { border-color: var(--amarillo); }
-
+ 
 .nivel { color: var(--verde); margin: 0 0 4px; }
 .escena-titulo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 .escena-titulo .grande { font-size: 2rem; }
 .escena-titulo h2 { margin: 0; }
-
+ 
 .rutas { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
 .ruta { text-align: left; padding: 14px; margin: 0; }
 .ruta strong { display: block; margin-bottom: 8px; }
 .ruta.seguro { background: var(--verde); }
 .ruta.riesgo { background: var(--rojo); }
-
+ 
 .option { display: block; width: 100%; text-align: left; margin: 10px 0; background: var(--panel2); color: var(--blanco); }
 .option:hover:not(:disabled) { background: #4340a8; border-color: var(--amarillo); }
 .option.correct { background: #1f8a3a; color: #fff; opacity: 1; }
 .option.incorrect { background: #b3203f; color: #fff; opacity: 1; }
 .option.tachada { text-decoration: line-through; opacity: .35; }
-
+ 
 .feedback { margin: 16px 0; padding: 14px; background: #000; border: 4px solid var(--cian); line-height: 2; }
 .feedback.success { border-color: var(--verde); }
 .feedback.error { border-color: var(--rojo); }
-
+ 
 .insignias { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
 .insignia { padding: 6px 10px; background: #000; border: 3px solid var(--amarillo); }
 .rango { font-size: 1.1em; color: var(--verde); margin: 10px 0; }
 footer { text-align: center; color: #9a98e0; padding: 0 15px 24px; font-size: .65rem; }
-
+ 
 @media (max-width: 600px) {
   .cabecera .lupa { font-size: 1.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
 }
-
+ 
 /* ===== Letra 8 bit ===== */
 body {
   font-family: var(--fuente);
@@ -159,7 +159,7 @@ button { font-family: var(--titulo); font-size: 16px; line-height: 1.4; letter-s
 .nota, .feedback { line-height: 1.7; }
 .reglas { line-height: 1.8; }
 footer { font-size: 14px; }
-
+ 
 /* ===== Iconos pixel art ===== */
 .ic { display: inline-block; vertical-align: middle; line-height: 0; }
 .ico { display: inline-block; vertical-align: middle; image-rendering: pixelated; flex: none; }
@@ -169,7 +169,7 @@ button .ico { position: relative; top: -2px; }
 .lupa svg { display: block; width: 42px; height: 48px; image-rendering: pixelated; }
 .escena-titulo .grande { display: inline-flex; line-height: 0; }
 .insignia { display: flex; align-items: center; gap: 8px; }
-
+ 
 /* ===== Mundo nocturno ===== */
 .mini svg { display: block; width: 28px; height: 32px; image-rendering: pixelated; }
 .mundo {
@@ -186,7 +186,7 @@ button .ico { position: relative; top: -2px; }
   .hud, .hud-der { position: static; max-width: none; padding: 8px 8px 0; background: #000; }
   .hud-der { padding-bottom: 8px; }
 }
-
+ 
 /* ===== Ingredientes y poción ===== */
 .cabecera #bSonido { margin-left: auto; font-size: 14px; padding: 6px 10px; }
 .hud-ing { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 4px; }
@@ -205,7 +205,7 @@ button .ico { position: relative; top: -2px; }
 #cargaPocion { text-align: center; color: var(--cian); min-height: 2em; }
 @media (prefers-reduced-motion: reduce) { .burbujas i { animation: none; } }
 @media print { body * { visibility: hidden; } #tarjeta, #tarjeta * { visibility: visible; } #tarjeta { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; } }
-
+ 
 /* ===== Celular, tablet y PC ===== */
 html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: hidden; padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -233,7 +233,7 @@ svg, canvas { max-width: 100%; }
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="cabecera">
     <div class="lupa" id="lupa"></div>
@@ -244,7 +244,7 @@ svg, canvas { max-width: 100%; }
     <button class="suave" id="bSonido" onclick="alternarSonido()">Sonido: sí</button>
   </div>
 </header>
-
+ 
 <main>
   <div class="mundo inicio" id="mundo">
     <canvas id="mundoCanvas" width="640" height="352" role="img" aria-label="Mundo de noche: un sendero con seis obstáculos que la bruja detective debe cruzar volando hasta la torre final"></canvas>
@@ -252,7 +252,7 @@ svg, canvas { max-width: 100%; }
     <div class="hud-der" id="hudDer"></div>
     <div class="hud-ing" id="hudIng" aria-label="Ingredientes reunidos"></div>
   </div>
-
+ 
   <section class="panel" id="inicio">
     <h2>¡Nueva partida!</h2>
     <p>
@@ -276,7 +276,7 @@ svg, canvas { max-width: 100%; }
     <input id="nombre" placeholder="Escribe aquí" maxlength="30">
     <button onclick="comenzar()"><i class="ic" data-n="flecha"></i> Iniciar juego</button>
   </section>
-
+ 
   <section class="oculto" id="juego">
     <div class="panel">
       <div id="escena"></div>
@@ -284,7 +284,7 @@ svg, canvas { max-width: 100%; }
       <div id="acciones"></div>
     </div>
   </section>
-
+ 
   <section class="panel oculto" id="victoria">
     <h2>¡Llegaste al caldero mágico! <i class="ic" data-n="caldero" data-px="3"></i></h2>
     <p id="resumen"></p>
@@ -315,7 +315,7 @@ svg, canvas { max-width: 100%; }
     </div>
     <button class="suave" onclick="comenzar()"><i class="ic" data-n="volver"></i> Jugar de nuevo</button>
   </section>
-
+ 
   <section class="panel oculto" id="derrota">
     <h2>Game over <i class="ic" data-n="nube" data-px="3"></i></h2>
     <p id="resumenDerrota"></p>
@@ -323,9 +323,9 @@ svg, canvas { max-width: 100%; }
     <button onclick="comenzar()"><i class="ic" data-n="volver"></i> Continuar</button>
   </section>
 </main>
-
+ 
 <footer>Español · Sexto grado · Aprende investigando, leyendo e imaginando.</footer>
-
+ 
 <script>
 /* ================= ICONOS PIXEL ART (reemplazan a los emojis) ================= */
 const ICO_PAL = { k:"#0a0820", R:"#ff4d6d", r:"#ffa3b5", Y:"#ffd23f", y:"#fff3a0", O:"#d9a21a", G:"#5bd75b", g:"#2f8f55",
@@ -367,8 +367,8 @@ Object.assign(ICONOS, {
   gomita: [".GGGG.","GgGGGG","GGGGGG","GGGGGG",".GGGG."],
   malvavisco: [".WWWW.","WWWWWW","WSWWWW","WWWWWW",".WWWW."]
 });
-
-
+ 
+ 
 function ico(n, px, pal) {
   const f = ICONOS[n]; px = px || 2;
   const w = f[0].length, h = f.length;
@@ -408,7 +408,7 @@ function dibujarIcono(c, n, cx, cy, esc) {
   const x0 = Math.round(cx - w * esc / 2), y0 = Math.round(cy - h * esc / 2);
   _icoRuns[n].forEach(([x, y, k, col]) => { c.fillStyle = col; c.fillRect(x0 + x * esc, y0 + y * esc, k * esc, esc); });
 }
-
+ 
 /* Cada obstáculo tiene 8 preguntas.
    t = texto de la pista, p = pregunta, o = opciones, c = índice de la correcta,
    h = pista de la linterna, e = explicación */
@@ -666,7 +666,7 @@ const obstaculos = [
       e: "Los colores y el lugar permiten imaginar el atardecer, mientras que bonito es muy general." }
   ]}
 ];
-
+ 
 /* ---------- Ingredientes mágicos: uno por obstáculo ---------- */
 const INGREDIENTES = [
   { n: "Polvo del reloj detenido", i: "reloj", d: "da paciencia para esperar el turno de los dulces" },
@@ -683,7 +683,7 @@ const DULCES = [
 ];
 const SEL = new Set();
 let RECETA = "";
-
+ 
 /* ---------- Sonido 8-bit (se puede apagar) ---------- */
 let audioCtx = null, sonidoOn = true;
 function pitido(f, d, tipo) {
@@ -706,12 +706,12 @@ document.addEventListener("keydown", e => {
   const b = i >= 0 && document.querySelectorAll(".option")[i];
   if (b && !b.disabled) b.click();
 });
-
+ 
 const NP = 8, MINIMO = 5, VIDAS = 5;
 const TOTAL = obstaculos.length + 2;
 let E = null;
 const $ = id => document.getElementById(id);
-
+ 
 function mostrar(id) {
   ["inicio", "juego", "victoria", "derrota"].forEach(s => $(s).classList.add("oculto"));
   $(id).classList.remove("oculto");
@@ -720,7 +720,7 @@ function mostrar(id) {
   W.hover = id === "inicio";
   window.scrollTo({ top: 0 });
 }
-
+ 
 function mezclar(n) {
   const a = [...Array(n).keys()];
   for (let i = n - 1; i > 0; i--) {
@@ -729,7 +729,7 @@ function mezclar(n) {
   }
   return a;
 }
-
+ 
 function comenzar() {
   const nombre = $("nombre").value.trim() || (E && E.nombre) || "Detective";
   E = {
@@ -741,7 +741,7 @@ function comenzar() {
   mostrar("juego");
   mostrarObstaculo();
 }
-
+ 
 function pintarRecursos() {
   $("recursos").innerHTML =
     `<div class="dato"><span class="mini">${svgPixeles(CUERPO.concat(PIES_A))}</span><span id="rNombre"></span></div>` +
@@ -756,7 +756,7 @@ function pintarRecursos() {
     : `<div class="ing-slot" title="Ingrediente por reclamar">?</div>`).join("");
   $("hudDer").innerHTML = `<div class="dato">${ico("luna", 2)} Obstáculo ${Math.min(E.o + 1, obstaculos.length)}/${obstaculos.length}</div>`;
 }
-
+ 
 /* ---------- Sprites pixel de la bruja ---------- */
 const PAL = { h:"#9b5cff", H:"#ffd23f", s:"#ffcf9f", r:"#ff7a3d", e:"#14102e", m:"#e0486a",
               d:"#b46bff", C:"#ffd23f", b:"#ff4d6d", y:"#ffd23f", B:"#ff4d6d", w:"#c98a4b" };
@@ -788,7 +788,7 @@ const VUELO_B = CUERPO.map(f => "....".concat(f, "..")).concat([
   "yyyyyyyBwwwwwwwwwwww",
   "...yyyy............."
 ]);
-
+ 
 function svgPixeles(filas, clase) {
   const w = filas[0].length, h = filas.length;
   let r = "";
@@ -805,7 +805,7 @@ function svgPixeles(filas, clase) {
   });
   return `<svg${clase ? ` class="${clase}"` : ""} viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
 }
-
+ 
 /* ================= MUNDO NOCTURNO (canvas pixel art) ================= */
 const MW = 640, MH = 352;
 /* paradas: 0 = campamento, 1..6 = frente a cada obstáculo, 7 = trofeo.
@@ -835,10 +835,10 @@ function dCamino(px, py) {
   for (let i = 0; i < PARADAS.length - 1; i++) m = Math.min(m, dSeg(px, py, PARADAS[i], PARADAS[i+1]));
   return m;
 }
-
+ 
 const mundoBase = document.createElement("canvas");
 mundoBase.width = MW; mundoBase.height = MH;
-
+ 
 function construirBase() {
   const c = mundoBase.getContext("2d");
   const rnd = mulberry32(11);
@@ -849,7 +849,7 @@ function construirBase() {
       R(cx - hw, cy + dy, hw * 2, 2, col);
     }
   };
-
+ 
   /* césped de noche */
   for (let y = 0; y < MH; y += 8) for (let x = 0; x < MW; x += 8) {
     const v = rnd();
@@ -857,7 +857,7 @@ function construirBase() {
     if (rnd() < .35) R(x + Math.floor(rnd() * 6), y + Math.floor(rnd() * 6), 2, 2, "#27603d");
     if (rnd() < .05) R(x + 3, y + 3, 2, 2, rnd() < .5 ? "#7a6ac8" : "#c8c86a");
   }
-
+ 
   /* sendero de tierra */
   const cam = new Set();
   for (let y = 0; y < MH; y += 8) for (let x = 0; x < MW; x += 8) if (dCamino(x + 4, y + 4) <= 13) cam.add(x + "," + y);
@@ -871,7 +871,7 @@ function construirBase() {
     if (!cam.has((x - 8) + "," + y)) R(x, y, 2, 8, "#3d3224");
     if (!cam.has((x + 8) + "," + y)) R(x + 6, y, 2, 8, "#3d3224");
   });
-
+ 
   /* piezas */
   const pino = (x, y) => {
     R(x - 2, y - 5, 4, 5, "#3a2a1e");
@@ -903,7 +903,7 @@ function construirBase() {
     R(x - 4, y - 8, 8, 8, "#1b0f26");
   };
   const gema = (x, y) => { R(x - 5, y - 1, 10, 4, "#3d3d5c"); R(x - 5, y - 1, 10, 1, "#58588a"); };
-
+ 
   /* árboles repartidos fuera del sendero y de los obstáculos */
   const centros = [1, 2, 3, 4, 5, 6].map(centroObst);
   const libre = (x, y) =>
@@ -921,17 +921,17 @@ function construirBase() {
     arboles.push([x, y, t < .18 ? 1 : t < .3 ? 2 : t < .36 ? 3 : 0]);
   }
   arboles.sort((a, b) => a[1] - b[1]).forEach(([x, y, t]) => (t === 1 ? seco : t === 2 ? arbusto : t === 3 ? roca : pino)(x, y));
-
+ 
   /* casitas con ventanas encendidas */
   CASAS.forEach(h => casa(h[0], h[1], "#6b2a2a", "#7a3232"));
-
+ 
   /* campamento */
   carpa(PARADAS[0][0] - 22, PARADAS[0][1] - 6);
   R(FUEGO[0] - 8, FUEGO[1], 16, 3, "#4a4a58"); R(FUEGO[0] - 5, FUEGO[1] - 3, 10, 3, "#4a2f1a");
-
+ 
   /* piedras-runa de cada parada */
   for (let k = 1; k <= 6; k++) gema(PARADAS[k][0], PARADAS[k][1]);
-
+ 
   /* obstáculos */
   let [mx, my] = centroObst(1);            // 1 · estación abandonada
   elipse(mx, my, 24, 16, "#262633");
@@ -941,17 +941,17 @@ function construirBase() {
   R(mx - 11, my - 5, 5, 4, "#1a1a22"); R(mx + 6, my - 5, 5, 4, "#1a1a22");
   R(mx - 8, my - 13, 5, 4, "#ffd27a"); R(mx + 2, my - 13, 5, 4, "#ffd27a");
   R(mx + 20, my - 24, 2, 20, "#4a4a58"); R(mx + 17, my - 28, 8, 5, "#ffd27a");
-
+ 
   [mx, my] = centroObst(2);                // 2 · casa embrujada
   elipse(mx, my + 16, 30, 10, "#101a2a");
   casa(mx - 22, my - 14, "#4a2a5e", "#5a3470");
   R(mx + 26, my + 8, 6, 9, "#55556b"); R(mx + 25, my + 8, 8, 2, "#6a6a82");
   R(mx - 32, my + 10, 6, 9, "#55556b"); R(mx - 33, my + 10, 8, 2, "#6a6a82");
-
+ 
   [mx, my] = centroObst(3);                // 3 · bosque espeso
   elipse(mx, my + 14, 28, 14, "#0c2016");
   [[-16, 6], [-6, -2], [8, -4], [18, 8], [-12, 18], [2, 16], [14, 20]].sort((a, b) => a[1] - b[1]).forEach(([dx, dy]) => pino(mx + dx, my + dy));
-
+ 
   [mx, my] = centroObst(4);                // 4 · cueva
   for (let dy = -18; dy < 16; dy += 2) {
     const hw = Math.round(26 * Math.sqrt(1 - (dy / 20) ** 2));
@@ -959,26 +959,26 @@ function construirBase() {
   }
   R(mx - 9, my + 2, 18, 14, "#05050c"); R(mx - 7, my - 2, 14, 4, "#05050c"); R(mx - 5, my - 4, 10, 2, "#05050c");
   R(mx + 15, my + 4, 3, 7, "#4fd8ff"); R(mx + 19, my + 7, 3, 5, "#7fe6ff"); R(mx - 20, my + 6, 3, 6, "#4fd8ff");
-
+ 
   [mx, my] = centroObst(5);                // 5 · puente roto sobre un río
   elipse(mx, my, 32, 18, "#17356b"); elipse(mx, my, 25, 13, "#1e4585");
   R(mx - 32, my - 5, 24, 10, "#6b4a2b"); R(mx + 8, my - 5, 24, 10, "#6b4a2b");
   for (let i = 0; i < 4; i++) { R(mx - 30 + i * 6, my - 5, 1, 10, "#3d2a18"); R(mx + 10 + i * 6, my - 5, 1, 10, "#3d2a18"); }
   R(mx - 32, my - 9, 3, 5, "#3d2a18"); R(mx + 29, my - 9, 3, 5, "#3d2a18"); R(mx - 10, my - 8, 2, 5, "#3d2a18");
-
+ 
   [mx, my] = centroObst(6);                // 6 · torre del relato
   R(mx - 12, my - 32, 24, 46, "#44445f");
   for (let i = 0; i < 8; i++) { R(mx - 12, my - 32 + i * 6, 24, 1, "#33334a"); R(mx - 12 + ((i % 2) ? 6 : 12), my - 32 + i * 6, 1, 6, "#33334a"); }
   for (let i = 0; i < 3; i++) R(mx - 12 + i * 10, my - 38, 6, 6, "#44445f");
   R(mx - 3, my - 22, 6, 10, "#ffd27a"); R(mx - 4, my + 4, 8, 10, "#16101f");
   R(mx, my - 52, 1, 14, "#aaa"); R(mx + 1, my - 52, 8, 5, "#ff4d6d");
-
+ 
   const [tx, ty] = PARADAS[7];             // meta · trofeo
   elipse(tx, ty, 20, 12, "#3a3a52"); elipse(tx, ty, 13, 8, "#4a4a68");
   R(tx - 10, ty - 14, 20, 12, "#22222e"); R(tx - 12, ty - 16, 24, 4, "#33334a"); R(tx - 9, ty - 16, 18, 2, "#5bd75b");
   R(tx - 10, ty - 2, 3, 4, "#22222e"); R(tx + 7, ty - 2, 3, 4, "#22222e");
 }
-
+ 
 /* ---------- La bruja en el mundo ---------- */
 const _runs = new Map();
 function runsDe(filas) {
@@ -1004,16 +1004,16 @@ function dibujarSprite(c, filas, x0, y0, esc, voltear) {
     c.fillRect(Math.round(px), Math.round(y0 + y * esc), n * esc, esc);
   });
 }
-
+ 
 const W = { x: PARADAS[0][0], y: PARADAS[0][1], alt: 0, modo: "quieta", voltear: false,
             cola: [], leg: null, u: 0, len: 1, vel: 50, fin: null, hover: true,
             tropiezo: 0, salto: 0, chispas: [], tChispa: 0 };
-
+ 
 function colocarBruja(k) {
   W.x = PARADAS[k][0]; W.y = PARADAS[k][1]; W.alt = 0; W.cola = []; W.leg = null; W.modo = "quieta"; W.fin = null;
 }
 function pintarTablero() { if (!W.leg && !W.cola.length) colocarBruja(E.vis); }
-
+ 
 function construirTramos(k0, k1, modo) {
   const L = [];
   for (let k = k0; k < k1; k++) {
@@ -1027,7 +1027,7 @@ function construirTramos(k0, k1, modo) {
   }
   return L;
 }
-
+ 
 /* modo: "camina" = sendero + vuelo sobre cada obstáculo; "vuela" = atajo volando todo el camino */
 function moverBruja(destino, modo, alTerminar) {
   const Ej = E;
@@ -1037,7 +1037,7 @@ function moverBruja(destino, modo, alTerminar) {
   W.fin = () => { if (Ej !== E) return; E.vis = destino; if (alTerminar) alTerminar(); };
   if (!W.cola.length) { const f = W.fin; W.fin = null; f(); }
 }
-
+ 
 function actualizarBruja(dt, t) {
   const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!W.leg && W.cola.length) {
@@ -1081,7 +1081,7 @@ function actualizarBruja(dt, t) {
   W.chispas = W.chispas.filter(p => p.vida > 0);
 }
 function tropezarBruja() { W.tropiezo = .7; }
-
+ 
 /* ---------- Dibujo de cada cuadro ---------- */
 const mundoCanvas = $("mundoCanvas");
 const mctx = mundoCanvas.getContext("2d");
@@ -1089,14 +1089,14 @@ const noche = document.createElement("canvas");
 noche.width = MW; noche.height = MH;
 const nctx = noche.getContext("2d");
 let enInicio = true;
-
+ 
 function luz(x, y, r, a) {
   [[1, .18], [.75, .2], [.5, .25], [.28, .3]].forEach(([f, al]) => {
     nctx.fillStyle = `rgba(0,0,0,${al * (a === undefined ? 1 : a)})`;
     nctx.beginPath(); nctx.arc(x, y, r * f, 0, 6.2832); nctx.fill();
   });
 }
-
+ 
 function dibujarMundo(ts) {
   const c = mctx, t = ts / 1000;
   const R = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
@@ -1104,7 +1104,7 @@ function dibujarMundo(ts) {
   c.imageSmoothingEnabled = false;
   c.globalCompositeOperation = "source-over";
   c.drawImage(mundoBase, 0, 0);
-
+ 
   /* río del puente */
   const [bx, by] = centroObst(5);
   for (let i = 0; i < 10; i++) {
@@ -1142,7 +1142,7 @@ function dibujarMundo(ts) {
     c.fillStyle = `rgba(200,255,120,${.35 + .65 * Math.max(0, Math.sin(t * 3 + i * 2))})`;
     c.fillRect(Math.round(x), Math.round(y), 2, 2);
   }
-
+ 
   /* la bruja */
   const sh = Math.max(6, 22 - W.alt * .5);
   R(W.x - sh / 2, W.y - 2, sh, 4, "rgba(0,0,0,.45)");
@@ -1157,7 +1157,7 @@ function dibujarMundo(ts) {
   if (W.tropiezo > 0) { c.font = "16px Silkscreen, monospace"; c.fillStyle = "#ff4d6d"; c.fillText("!", W.x, W.y - alto - W.alt - 6); }
   W.chispas.forEach(p => { c.globalAlpha = Math.min(1, p.vida * 2); c.fillStyle = p.col; c.fillRect(Math.round(p.x), Math.round(p.y), 2, 2); });
   c.globalAlpha = 1;
-
+ 
   /* ingrediente reclamado */
   if (W.botin) {
     const b = W.botin, by = W.y - alto - W.alt - 14 - b.t * 18;
@@ -1181,7 +1181,7 @@ function dibujarMundo(ts) {
   luz(PARADAS[7][0], PARADAS[7][1] - 10, 58 + Math.sin(t * 3) * 3, .95);
   if (vis < 7) luz(PARADAS[vis][0], PARADAS[vis][1], 30, .6);
   c.drawImage(noche, 0, 0);
-
+ 
   /* portada */
   if (enInicio) {
     c.fillStyle = "rgba(4,6,28,.84)"; c.fillRect(150, 26, 340, 98);
@@ -1192,7 +1192,7 @@ function dibujarMundo(ts) {
     c.font = "8px Silkscreen, monospace"; c.fillStyle = "#3ef0ff"; c.fillText("OPERACIÓN ESCENARIO · MUNDO DE NOCHE", 320, 114);
   }
 }
-
+ 
 let _ult = 0;
 function bucleMundo(ts) {
   const dt = Math.min(.05, (ts - _ult) / 1000 || 0); _ult = ts;
@@ -1209,7 +1209,7 @@ function iniciarMundo() {
   }
   requestAnimationFrame(bucleMundo);
 }
-
+ 
 function pintarPips() {
   let h = '<div class="pips" aria-label="Progreso de preguntas">';
   for (let i = 0; i < NP; i++) {
@@ -1218,24 +1218,24 @@ function pintarPips() {
   }
   return h + "</div>";
 }
-
+ 
 function limpiarMensaje() {
   $("retroalimentacion").classList.add("oculto");
   $("acciones").innerHTML = "";
 }
-
+ 
 function mensaje(texto, tipo) {
   const f = $("retroalimentacion");
   f.className = "feedback " + (tipo || "");
   f.textContent = texto;
 }
-
+ 
 function encabezado(ob) {
   return `<p class="nivel">${ob.tema}</p>` +
     `<div class="escena-titulo"><span class="grande">${ico(ob.icono, 3)}</span>` +
     `<h2>Obstáculo ${E.o + 1} de ${obstaculos.length}: ${ob.titulo}</h2></div>`;
 }
-
+ 
 function mostrarObstaculo() {
   const ob = obstaculos[E.o];
   E.ruta = null; E.bloq = false;
@@ -1254,14 +1254,14 @@ function mostrarObstaculo() {
     `<button class="ruta riesgo" onclick="elegirRuta('riesgo')"><strong>${ico("fuego", 2)} Atajo arriesgado</strong>La bruja vuela directo en su escoba. +25 puntos por acierto. Cada error cuesta una vida.</button>` +
     `</div>`;
 }
-
+ 
 function elegirRuta(tipo) {
   E.ruta = tipo;
   E.q = 0; E.aciertosObs = 0; E.ptsObs = 0; E.pips = [];
   E.ordenQ = mezclar(NP);
   mostrarPregunta();
 }
-
+ 
 function mostrarPregunta() {
   const ob = obstaculos[E.o];
   const r = ob.preguntas[E.ordenQ[E.q]];
@@ -1278,7 +1278,7 @@ function mostrarPregunta() {
     `<h3>${r.p}</h3><div id="opciones"></div>` +
     `<div><button class="suave" id="bPista" onclick="usarPista()">${ico("linterna", 2)} Linterna (${E.pistas})</button>` +
     `<button class="suave" id="bTijera" onclick="usarTijeras()">${ico("tijeras", 2)} Tijeras (${E.comodines})</button></div>`;
-
+ 
   if (window.innerWidth <= 900) $("escena").scrollIntoView({ block: "start", behavior: "smooth" });
   const cont = $("opciones");
   E.orden.forEach((k, pos) => {
@@ -1290,11 +1290,11 @@ function mostrarPregunta() {
     cont.appendChild(b);
   });
 }
-
+ 
 function preguntaActual() {
   return obstaculos[E.o].preguntas[E.ordenQ[E.q]];
 }
-
+ 
 function usarPista() {
   if (E.bloq) return;
   if (!E.usoPista) {
@@ -1305,7 +1305,7 @@ function usarPista() {
   }
   mensaje("Pista del detective: " + preguntaActual().h);
 }
-
+ 
 function usarTijeras() {
   if (E.bloq || E.uso5050) return;
   if (E.comodines <= 0) { mensaje("Ya no te quedan tijeras.", "error"); return; }
@@ -1319,7 +1319,7 @@ function usarTijeras() {
   pintarRecursos();
   $("bTijera").disabled = true;
 }
-
+ 
 function responder(k) {
   if (E.bloq) return;
   E.bloq = true;
@@ -1333,7 +1333,7 @@ function responder(k) {
   const acc = $("acciones");
   const ultima = E.q === NP - 1;
   const sig = ico("flecha", 2) + (ultima ? " Ver resultado del obstáculo" : " Siguiente pregunta");
-
+ 
   E.pips[E.q] = ok;
   if (ok) melodia([660, 880]); else pitido(160, .25, "sawtooth");
   if (ok) {
@@ -1366,13 +1366,13 @@ function responder(k) {
   $("escena").querySelector(".pips").outerHTML = pintarPips();
   if (window.innerWidth <= 900) setTimeout(() => $("acciones").scrollIntoView({ block: "nearest", behavior: "smooth" }), 80);
 }
-
+ 
 function siguientePregunta() {
   E.q++;
   if (E.q >= NP) cerrarObstaculo();
   else mostrarPregunta();
 }
-
+ 
 function cerrarObstaculo() {
   const ob = obstaculos[E.o];
   const ultimo = E.o === obstaculos.length - 1;
@@ -1408,7 +1408,7 @@ function cerrarObstaculo() {
     }
   }
 }
-
+ 
 function reclamar() {
   const ob = obstaculos[E.o], g = ob.ing, ultimo = E.o === obstaculos.length - 1;
   E.ing.push(E.o); W.botin = { i: g.i, t: 0 };
@@ -1419,18 +1419,18 @@ function reclamar() {
     ? `<button onclick="ganar()">${ico("caldero", 2)} Ir al caldero mágico</button>`
     : `<button onclick="avanzar()">${ico("flecha", 2)} Siguiente obstáculo</button>`;
 }
-
+ 
 function avanzar() {
   E.o++;
   mostrarObstaculo();
 }
-
+ 
 function perder() {
   mostrar("derrota");
   $("resumenDerrota").textContent =
     `${E.nombre}, llegaste al obstáculo ${E.o + 1} de ${obstaculos.length} y reuniste ${E.puntos} puntos.`;
 }
-
+ 
 function ganar() {
   mostrar("victoria"); prepararFinal();
   const total = obstaculos.length * NP;
@@ -1445,7 +1445,7 @@ function ganar() {
   $("rango").innerHTML = ico("medalla", 3, pal) + " Rango: " + txt;
   $("insigniasFinales").innerHTML = E.ins.map(o => `<span class="insignia">${ico("medalla", 2)}${ico(o.icono, 2)} ${o.titulo}</span>`).join("");
 }
-
+ 
 function prepararFinal() {
   SEL.clear();
   $("pasoPocion").classList.remove("oculto"); $("resultado").classList.add("oculto");
@@ -1465,7 +1465,7 @@ function prepararFinal() {
     cont.appendChild(b);
   });
 }
-
+ 
 function prepararPocion() {
   const m = $("mensajeFinal"), Ej = E;
   const nom = $("nomPocion").value.trim() || "Poción de la dulce amistad", txt = $("creacion").value.trim();
@@ -1493,12 +1493,12 @@ function prepararPocion() {
     melodia([392, 523, 659, 784, 1047]);
   }, items.length * 450 + 300);
 }
-
+ 
 function copiarReceta() {
   try { navigator.clipboard.writeText(RECETA); } catch (e) {}
   $("mensajeCopia").textContent = "¡Receta copiada! Pégala en tu cuaderno o compártela con tu grupo.";
 }
-
+ 
 iniciarMundo();
 </script>
 </body>
